@@ -44,11 +44,12 @@ function Home() {
           </Link>
         </div>
       </header>
-      <section className="p-12">
-        <h2 className="text-4xl font-bold text-center mb-8">Nos Plats</h2>
+      <section className="p-12 bg-cover" style={{ backgroundImage: 'url("/images/bgMenu.jpg")' }}>
+        <h2 className="text-4xl font-bold text-center text-white mb-8">Nos Plats</h2>
         <div className="flex flex-wrap justify-center gap-8">
           {dishes.map((dish) => (
-            <div key={dish.id} className="bg-white text-black rounded-lg shadow-lg p-6 transform transition duration-500 hover:scale-105 hover:shadow-2xl" style={{ width: '250px' }}>
+            <div key={dish.id} className="bg-gray-800 text-white rounded-lg shadow-lg p-6 transform transition duration-500 hover:scale-105 hover:shadow-2xl" style={{ width: '250px' }}>
+              <img src={dish.image} alt={dish.name} className="w-full h-32 object-cover rounded-t-lg mb-4" />
               <h3 className="text-2xl font-bold mb-3">{dish.name}</h3>
               <p className="mb-2">{dish.description}</p>
               <p className="mt-2 font-semibold">Prix: {dish.price} €</p>

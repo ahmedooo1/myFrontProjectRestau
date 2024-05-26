@@ -41,19 +41,24 @@ function Dishes() {
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <h1 className="text-3xl font-bold mb-6">Plats</h1>
-      <ul className="space-y-4">
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {dishes.map((dish) => (
-          <li key={dish.id} className="p-4 bg-white rounded-lg shadow hover:bg-gray-100 transition duration-300 cursor-pointer">
-            <div onClick={() => handleDishClick(dish.id)}>
-              <h2 className="text-xl font-bold">{dish.name}</h2>
-              <p>{dish.description}</p>
-              <p>Prix: {dish.price} €</p>
-              <p>Type: {dish.type}</p>
-              <p>Disponible jusqu'à: {dish.available_until}</p>
+          <li key={dish.id} className="bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 cursor-pointer">
+            <div onClick={() => handleDishClick(dish.id)} className="flex flex-col items-center p-4">
+              <div className="w-full">
+                <img src={dish.image} alt={dish.name} className="w-full h-48 object-cover rounded-t-lg"/>
+              </div>
+              <div className="w-full p-4">
+                <h2 className="text-xl font-bold mb-2">{dish.name}</h2>
+                <p className="text-gray-700 mb-2">{dish.description}</p>
+                <p className="text-gray-900 font-semibold">Prix: {dish.price} €</p>
+                <p className="text-gray-600">Type: {dish.type}</p>
+                <p className="text-gray-600">Disponible jusqu'à: {dish.available_until}</p>
+              </div>
             </div>
             <button
               onClick={() => handleAddToCart(dish)}
-              className="mt-2 p-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
+              className="w-full p-2 bg-blue-500 text-white rounded-b-lg hover:bg-blue-700 transition duration-300"
             >
               Commander
             </button>

@@ -21,15 +21,21 @@ function DishDetails() {
   }, [id]);
 
   if (!dish) {
-    return <div>Chargement...</div>;
+    return <div className="flex justify-center items-center min-h-screen bg-gray-100">Chargement...</div>;
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <h1 className="text-3xl font-bold mb-6">{dish.name}</h1>
-      <p>{dish.description}</p>
-      <p>Prix: ${dish.price}</p>
-      {/* Ajouter plus de détails si nécessaire */}
+    <div className="min-h-screen bg-gray-800 p-8">
+      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden mt-14">
+        <img src={dish.image} alt={dish.name} className="w-full h-64 object-cover" />
+        <div className="p-6">
+          <h1 className="text-3xl font-bold mb-4">{dish.name}</h1>
+          <p className="text-gray-700 mb-4">{dish.description}</p>
+          <p className="text-gray-900 font-semibold mb-4">Prix: ${dish.price}</p>
+          <p className="text-gray-600">Type: {dish.type}</p>
+          <p className="text-gray-600">Disponible jusqu'à: {dish.available_until}</p>
+        </div>
+      </div>
     </div>
   );
 }
