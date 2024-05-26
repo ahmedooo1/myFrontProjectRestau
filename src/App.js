@@ -12,13 +12,14 @@ import DishDetails from './components/DishDetails';
 import Header from './components/Header';
 import Cart from './components/Cart';
 import AdminDishes from './components/AdminDishes';
+import Home from './components/Home';
 
 function App() {
   return (
     <Router>
       <Header /> 
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Home />} />
         <Route path="/dishes" element={<Dishes />} />
         <Route path="/dishes/:id" element={<DishDetails />} />
         <Route path="/orders" element={<Orders />} />

@@ -45,7 +45,11 @@ function Dishes() {
         {dishes.map((dish) => (
           <li key={dish.id} className="p-4 bg-white rounded-lg shadow hover:bg-gray-100 transition duration-300 cursor-pointer">
             <div onClick={() => handleDishClick(dish.id)}>
-              {dish.name}
+              <h2 className="text-xl font-bold">{dish.name}</h2>
+              <p>{dish.description}</p>
+              <p>Prix: {dish.price} €</p>
+              <p>Type: {dish.type}</p>
+              <p>Disponible jusqu'à: {dish.available_until}</p>
             </div>
             <button
               onClick={() => handleAddToCart(dish)}

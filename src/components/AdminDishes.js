@@ -16,6 +16,10 @@ const AdminDishes = () => {
 
   useEffect(() => {
     const fetchDishes = async () => {
+      if (!token) {
+        toast.error('Vous devez être connecté pour voir les plats.');
+        return;
+      }
       try {
         const response = await axios.get('http://localhost:8000/api/restaurateur/dishes', {
           headers: {
@@ -41,21 +45,26 @@ const AdminDishes = () => {
   };
 
   const handleAddDish = async () => {
-    const formData = new FormData();
-    formData.append('name', newDish.name);
-    formData.append('description', newDish.description);
-    formData.append('price', newDish.price);
-    formData.append('type', newDish.type);
-    formData.append('available_until', newDish.available_until);
-    if (newDish.image) {
-      formData.append('image', newDish.image);
+    if (!token) {
+      toast.error('Vous devez être connecté pour ajouter un plat.');
+      return;
     }
 
+    const dishData = {
+      name: newDish.name,
+      description: newDish.description,
+      price: newDish.price,
+      type: newDish.type,
+      available_until: newDish.available_until
+    };
+
+    console.log(dishData); // Vérifiez les données avant de les envoyer
+
     try {
-      await axios.post('http://localhost:8000/api/restaurateur/dishes', formData, {
+      await axios.post('http://localhost:8000/api/restaurateur/dishes', dishData, {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'application/json'
         }
       });
       toast.success('Plat ajouté avec succès.');
@@ -81,30 +90,22 @@ const AdminDishes = () => {
   };
 
   const handleDeleteDish = async (dishId) => {
-    const token = localStorage.getItem('token');
-
     if (!token) {
-      console.error('No token found');
       toast.error('Vous devez être connecté pour supprimer un plat.');
       return;
     }
 
     try {
-      const response = await axios.delete(`http://localhost:8000/api/restaurateur/dishes/${dishId}`, {
+      await axios.delete(`http://localhost:8000/api/restaurateur/dishes/${dishId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
-      console.log('Dish deleted', response.data);
       toast.success('Plat supprimé avec succès.');
       setDishes(dishes.filter(dish => dish.id !== dishId));
     } catch (error) {
-      console.error('Erreur lors de la suppression du plat', error.response ? error.response.data : error.message);
-      if (error.response && error.response.status === 409) {
-        toast.error('Impossible de supprimer le plat car il est référencé par d\'autres enregistrements.');
-      } else {
-        toast.error('Erreur lors de la suppression du plat.');
-      }
+      console.error('Erreur lors de la suppression du plat', error);
+      toast.error('Erreur lors de la suppression du plat.');
     }
   };
 
@@ -152,7 +153,7 @@ const AdminDishes = () => {
           />
         </div>
         <div>
-          <label className="block text-gray-700">Disponible jusqu'au:</label>
+          <label className="block text-gray-700">Disponible jusqu'à:</label>
           <input
             type="datetime-local"
             value={newDish.available_until}
@@ -173,29 +174,31 @@ const AdminDishes = () => {
         <button
           type="button"
           onClick={handleAddDish}
-          className="mt-4 p-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
+          className="mt-4 bg-blue-500 text-white p-2 rounded-md"
         >
-          Ajouter un plat
+          Ajouter le plat
         </button>
       </form>
-      <ul className="mt-8 space-y-4">
-        {dishes.map((dish) => (
-          <li key={dish.id} className="p-4 bg-white rounded-lg shadow">
-            {dish.image && (
-              <img src={`http://localhost:8000/uploads/images/${dish.image}`} alt={dish.name} className="w-32 h-32 object-cover mb-4" />
-            )}
-            <div>
-              <strong>{dish.name}</strong> - {dish.description} - {dish.price}€ - {dish.type} - Disponible jusqu'au {dish.available_until}
-            </div>
-            <button
-              onClick={() => handleDeleteDish(dish.id)}
-              className="mt-2 p-2 bg-red-500 text-white rounded hover:bg-red-700 transition duration-300"
-            >
-              Supprimer
-            </button>
-          </li>
-        ))}
-      </ul>
+      <div className="mt-8">
+        <h2 className="text-2xl font-bold mb-4">Liste des plats</h2>
+        <ul>
+          {dishes.map(dish => (
+            <li key={dish.id} className="mb-4 p-4 border border-gray-300 rounded-md">
+              <h3 className="text-xl font-bold">{dish.name}</h3>
+              <p>{dish.description}</p>
+              <p>Prix: {dish.price}€</p>
+              <p>Type: {dish.type}</p>
+              <p>Disponible jusqu'au: {dish.available_until}</p>
+              <button
+                onClick={() => handleDeleteDish(dish.id)}
+                className="mt-2 bg-red-500 text-white p-2 rounded-md"
+              >
+                Supprimer
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

@@ -20,6 +20,7 @@ function Orders() {
             Authorization: `Bearer ${token}`
           }
         });
+        console.log(response.data); // Added this log to check the data
         setOrders(response.data);
       } catch (error) {
         console.error('Erreur lors de la récupération des commandes', error);
@@ -33,23 +34,33 @@ function Orders() {
     navigate(`/orders/${id}`);
   };
 
-
-
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <h1 className="text-3xl font-bold mb-6">Commandes</h1>
       <ul className="space-y-4">
-        {orders.map((order) => (
-          <li key={order.id} className="p-4 bg-white rounded-lg shadow hover:bg-gray-100 transition duration-300 cursor-pointer">
-            <div onClick={() => handleOrderClick(order.id)}>
-              {order.name}
-            </div>
-          
-          </li>
-        ))}
+        {orders.length === 0 ? (
+          <p>Aucune commande disponible.</p>
+        ) : (
+          orders.map((order) => (
+            <li key={order.id} className="p-4 bg-white rounded-lg shadow hover:bg-gray-100 transition duration-300 cursor-pointer">
+              <div onClick={() => handleOrderClick(order.id)}>
+                <p>ID: {order.id}</p>
+                <p>Date de commande: {order.ordered_at}</p>
+                <p>Articles:</p>
+                <ul>
+                  {order.items.map((item, index) => (
+                    <li key={index}>
+                      <p>Nom: {item.name}</p>
+                      <p>Quantité: {item.quantity}</p>
+                      <p>Prix: {item.price}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))
+        )}
       </ul>
-
-     
     </div>
   );
 }
