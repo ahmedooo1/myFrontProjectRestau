@@ -112,29 +112,31 @@ function Profile() {
             </div>
             {editMode ? (
               <>
-                <div className="flex items-center space-x-6">
-                  <div className="text-gray-700 font-semibold">Email:</div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-semibold mb-2" htmlFor="email">Email:</label>
                   <input
                     type="email"
+                    id="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="text-gray-900 border rounded p-3"
+                    className="w-full text-gray-900 border rounded p-3"
                   />
                 </div>
-                <div className="flex items-center space-x-6">
-                  <div className="text-gray-700 font-semibold">Nom:</div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-semibold mb-2" htmlFor="name">Nom:</label>
                   <input
                     type="text"
+                    id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="text-gray-900 border rounded p-3"
+                    className="w-full text-gray-900 border rounded p-3"
                   />
                 </div>
                 <button
                   onClick={handleUpdateProfile}
-                  className="mt-6 bg-blue-600 text-white p-3 rounded-lg"
+                  className="w-full mt-4 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300"
                 >
                   Mettre à jour le profil
                 </button>
@@ -142,36 +144,38 @@ function Profile() {
             ) : (
               <button
                 onClick={() => setEditMode(true)}
-                className="mt-6 bg-blue-600 text-white p-3 rounded-lg"
+                className="w-full mt-4 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300"
               >
                 Modifier le profil
               </button>
             )}
             {passwordMode ? (
               <>
-                <div className="flex items-center space-x-6">
-                  <div className="text-gray-700 font-semibold">Mot de passe actuel:</div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-semibold mb-2" htmlFor="current_password">Mot de passe actuel:</label>
                   <input
                     type="password"
+                    id="current_password"
                     name="current_password"
                     value={passwordData.current_password}
                     onChange={handlePasswordChange}
-                    className="text-gray-900 border rounded p-3"
+                    className="w-full text-gray-900 border rounded p-3"
                   />
                 </div>
-                <div className="flex items-center space-x-6">
-                  <div className="text-gray-700 font-semibold">Nouveau mot de passe:</div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-semibold mb-2" htmlFor="new_password">Nouveau mot de passe:</label>
                   <input
                     type="password"
+                    id="new_password"
                     name="new_password"
                     value={passwordData.new_password}
                     onChange={handlePasswordChange}
-                    className="text-gray-900 border rounded p-3"
+                    className="w-full text-gray-900 border rounded p-3"
                   />
                 </div>
                 <button
                   onClick={handleUpdatePassword}
-                  className="mt-6 bg-blue-600 text-white p-3 rounded-lg"
+                  className="w-full mt-4 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300"
                 >
                   Mettre à jour le mot de passe
                 </button>
@@ -179,7 +183,7 @@ function Profile() {
             ) : (
               <button
                 onClick={() => setPasswordMode(true)}
-                className="mt-6 bg-blue-600 text-white p-3 rounded-lg"
+                className="w-full mt-4 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300"
               >
                 Modifier le mot de passe
               </button>
@@ -188,7 +192,7 @@ function Profile() {
         ) : (
           <p className="text-center text-gray-600">Chargement...</p>
         )}
-        <button onClick={handleLogout} className="mt-8 w-full py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-800 transition duration-300">
+        <button onClick={handleLogout} className="w-full mt-8 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-800 transition duration-300">
           Déconnexion
         </button>
       </div>
@@ -197,6 +201,3 @@ function Profile() {
 }
 
 export default Profile;
-
-
-
