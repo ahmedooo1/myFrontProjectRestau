@@ -10,7 +10,9 @@ function Header() {
   };
 
   return (
-    <header className="text-white p-4 fixed w-full z-10" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+    <div>
+    <header className="text-white p-4 fixed  w-full z-10" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+
       <div className="container mx-auto flex justify-between items-center">
         <h1 className="text-xl font-bold">THE-CHEF 76</h1>
         <div className="md:hidden">
@@ -62,6 +64,7 @@ function Header() {
         </nav>
       </div>
     </header>
+    </div>
   );
 }
 

@@ -34,11 +34,11 @@ function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white">
-      <header className="relative text-center text-white">
-        <img src="/images/Falafel.jpg" width={300} height={500} alt="Restaurant Background" className="w-full h-96 object-cover opacity-60" />
+      <header className="relative text-center text-white h-[600px]">
+        <img src="/images/Falafel.jpg" width={300} height={600} alt="Restaurant Background" className="w-full h-full object-cover opacity-60" />
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50">
-          <h1 className="text-6xl font-extrabold animate__animated animate__fadeInDown">Bienvenue au Restaurant Moderne</h1>
-          <p className="mt-4 text-3xl animate__animated animate__fadeInUp">Découvrez nos plats délicieux et notre service exceptionnel</p>
+          <h1 className="text-7xl font-extrabold animate__animated animate__fadeInDown">Bienvenue au THE-CHEF 76</h1>
+          <p className="mt-4 text-4xl animate__animated animate__fadeInUp">Découvrez nos plats délicieux et notre service exceptionnel</p>
           <Link to="/dishes" className="mt-6 bg-yellow-500 text-black py-3 px-8 rounded-full text-lg font-semibold hover:bg-yellow-700 transition duration-300 shadow-lg">
             Voir Nos Plats
           </Link>
@@ -46,9 +46,9 @@ function Home() {
       </header>
       <section className="p-12">
         <h2 className="text-4xl font-bold text-center mb-8">Nos Plats</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="flex flex-wrap justify-center gap-8">
           {dishes.map((dish) => (
-            <div key={dish.id} className="bg-white text-black rounded-lg shadow-lg p-6 transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+            <div key={dish.id} className="bg-white text-black rounded-lg shadow-lg p-6 transform transition duration-500 hover:scale-105 hover:shadow-2xl" style={{ width: '250px' }}>
               <h3 className="text-2xl font-bold mb-3">{dish.name}</h3>
               <p className="mb-2">{dish.description}</p>
               <p className="mt-2 font-semibold">Prix: {dish.price} €</p>
