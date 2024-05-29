@@ -108,11 +108,11 @@ function Cart({ cart, setCart }) {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen bg-gray-800 p-8">
       <h1 className="text-3xl font-bold mb-6">Panier</h1>
       <ul className="space-y-4">
         {cart.map((item, index) => (
-          <li key={index} className="p-4 bg-white rounded-lg shadow">
+          <li key={index} className="p-4 bg-white text-black rounded-lg shadow">
             <div className="flex justify-between items-center">
               <div>
                 <h2 className="text-xl font-semibold">{item.name}</h2>
@@ -149,7 +149,7 @@ function Cart({ cart, setCart }) {
       <h1 className="text-3xl font-bold mt-8">Commandes</h1>
       <ul className="space-y-4">
         {orders.map((order, index) => (
-          <li key={index} className="p-4 bg-white rounded-lg shadow">
+          <li key={index} className="p-4 bg-white text-black rounded-lg shadow">
             <div className="flex justify-between items-center">
               <div>
                 <h2 className="text-xl font-semibold">Commande #{order.id}</h2>

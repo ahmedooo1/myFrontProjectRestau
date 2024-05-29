@@ -35,14 +35,14 @@ function Orders() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen bg-gray-800 text-white p-8">
       <h1 className="text-3xl font-bold mb-6">Commandes</h1>
       <ul className="space-y-4">
         {orders.length === 0 ? (
           <p>Aucune commande disponible.</p>
         ) : (
           orders.map((order) => (
-            <li key={order.id} className="p-4 bg-white rounded-lg shadow hover:bg-gray-100 transition duration-300 cursor-pointer">
+            <li key={order.id} className="p-4 bg-white text-black rounded-lg shadow hover:bg-gray-100 transition duration-300 cursor-pointer">
               <div onClick={() => handleOrderClick(order.id)}>
                 <p>ID: {order.id}</p>
                 <p>Date de commande: {order.ordered_at}</p>

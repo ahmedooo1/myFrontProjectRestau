@@ -92,7 +92,7 @@ function Profile() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center">
+      <div className="min-h-screen  bg-gray-800 flex items-center justify-center">
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
           <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Chargement...</h1>
         </div>
@@ -101,7 +101,7 @@ function Profile() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center">
+    <div className="min-h-screen bg-gray-800 flex items-center justify-center">
       <div className="bg-white p-12 rounded-lg shadow-2xl max-w-2xl w-full">
         <h1 className="text-5xl font-bold text-center text-gray-800 mb-8">Profil</h1>
         {user ? (

@@ -21,12 +21,12 @@ function DishDetails() {
   }, [id]);
 
   if (!dish) {
-    return <div className="flex justify-center items-center min-h-screen bg-gray-100">Chargement...</div>;
+    return <div className="flex justify-center items-center min-h-screen bg-gray-800 text-white">Chargement...</div>;
   }
 
   return (
-    <div className="min-h-screen bg-gray-800 p-8">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden mt-14">
+    <div className="min-h-screen bg-gray-800 text-white p-8">
+      <div className="max-w-4xl mx-auto bg-white text-black rounded-lg shadow-lg overflow-hidden mt-14">
         <img src={dish.image} alt={dish.name} className="w-full h-64 object-cover" />
         <div className="p-6">
           <h1 className="text-3xl font-bold mb-4">{dish.name}</h1>

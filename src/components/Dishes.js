@@ -39,11 +39,11 @@ function Dishes() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen bg-gray-800 text-white p-8 pt-16">
       <h1 className="text-3xl font-bold mb-6">Plats</h1>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {dishes.map((dish) => (
-          <li key={dish.id} className="bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 cursor-pointer">
+          <li key={dish.id} className="bg-white  rounded-lg shadow-lg hover:shadow-xl transition duration-300 cursor-pointer">
             <div onClick={() => handleDishClick(dish.id)} className="flex flex-col items-center p-4">
               <div className="w-full">
                 <img src={dish.image} alt={dish.name} className="w-full h-48 object-cover rounded-t-lg"/>
