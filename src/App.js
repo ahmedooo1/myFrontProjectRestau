@@ -13,6 +13,9 @@ import Header from './components/Header';
 import Cart from './components/Cart';
 import AdminDishes from './components/AdminDishes';
 import Home from './components/Home';
+import Footer from './components/Footer';
+import About from './components/About';
+
 
 function App() {
   return (
@@ -30,7 +33,9 @@ function App() {
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/cart" element={<PrivateRoute component={Cart} />} />
         <Route path="/admin/dishes" element={<AdminDishes />} />
+        <Route path="/About" element={<About />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }
