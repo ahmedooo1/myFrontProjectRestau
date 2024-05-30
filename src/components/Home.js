@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'tailwindcss/tailwind.css';
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaSmile, FaCalendarAlt, FaStar, FaUtensils, FaLeaf, FaConciergeBell } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaSmile, FaCalendarAlt, FaStar, FaUtensils, FaHome, FaConciergeBell } from 'react-icons/fa';
 
 function Home() {
   const [dishes, setDishes] = useState([]);
@@ -84,10 +84,10 @@ function Home() {
             <p className="text-center">Découvrez une variété de plats délicieux préparés avec des ingrédients frais.</p>
           </div>
           <div className="bg-gray-800 text-white rounded-lg shadow-lg p-6 flex flex-col items-center">
-            <FaLeaf className="text-yellow-500 text-6xl mb-4" />
-            <h3 className="text-2xl font-bold mb-3">Options Saines</h3>
-            <p className="text-center">Nous offrons des options de repas sains pour répondre à tous les régimes alimentaires.</p>
-          </div>
+            <FaHome className="text-yellow-500 text-6xl mb-4" />
+            <h3 className="text-2xl font-bold mb-3">Ambiance Conviviale</h3>
+            <p className="text-center">Profitez d'une ambiance chaleureuse et accueillante à chaque visite.</p>
+            </div>
           <div className="bg-gray-800 text-white rounded-lg shadow-lg p-6 flex flex-col items-center">
             <FaConciergeBell className="text-yellow-500 text-6xl mb-4" />
             <h3 className="text-2xl font-bold mb-3">Service Rapide</h3>
