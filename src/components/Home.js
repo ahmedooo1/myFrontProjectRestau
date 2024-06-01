@@ -44,21 +44,26 @@ function Home() {
           </Link>
         </div>
       </header>
-      <section className="p-12 bg-cover" style={{ backgroundImage: 'url("/images/bgMenu.jpg")' }}>
+      <section className="p-12 bg-contain bg-no-repeat bg-center h-[800px] m-16" style={{ backgroundImage: 'url("/images/bgMenu.jpg")' }}>
         <h2 className="text-4xl font-bold text-center text-white mb-8">Nos Plats</h2>
-        <div className="flex flex-wrap justify-center gap-8">
+        <div className="flex flex-col items-center gap-8">
           {dishes.map((dish) => (
-            <div key={dish.id} className="bg-gray-800 text-white rounded-lg shadow-lg p-6 transform transition duration-500 hover:scale-105 hover:shadow-2xl" style={{ width: '250px' }}>
-              <img src={dish.image} alt={dish.name} className="w-full h-32 object-cover rounded-t-lg mb-4" />
-              <h3 className="text-2xl font-bold mb-3">{dish.name}</h3>
-              <p className="mb-2">{dish.description}</p>
-              <p className="mt-2 font-semibold">Prix: {dish.price} €</p>
-              <Link to={`/dishes/${dish.id}`} className="mt-4 inline-block bg-yellow-500 text-black py-2 px-6 rounded-full hover:bg-yellow-700 transition duration-300 shadow-md">
-                Voir Détails
-              </Link>
+            <div key={dish.id} className="bg-gray-800 text-white rounded-full shadow-lg p-4 transform transition duration-500 hover:scale-105 hover:shadow-2xl flex items-center" style={{ width: '450px' }}>
+              <img src={dish.image} alt={dish.name} className="w-20 h-20 object-cover rounded-full mr-4" />
+              <div className="flex flex-col flex-grow">
+                <h3 className="text-xl font-bold mb-1">{dish.name}</h3>
+                <p className="mb-1 text-sm">{dish.description.split(' ').slice(0, 5).join(' ')}...</p>
+                <p className="mt-1 font-semibold text-sm">Prix: {dish.price} €</p>
+              </div>
+              <div className="flex justify-end mt-3">
+                <Link to={`/dishes/${dish.id}`} className="inline-block bg-yellow-500 text-black py-1 px-4 rounded-full hover:bg-yellow-700 transition duration-300 shadow-md text-sm">
+                  Voir Détails
+                </Link>
+              </div>
             </div>
           ))}
         </div>
+     
       </section>
       <section className="p-12 bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white">
         <h2 className="text-4xl font-bold text-center mb-8">Pourquoi Nous Choisir</h2>

@@ -39,33 +39,32 @@ function Dishes() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-800 text-white p-8 pt-16">
+    <div className="min-h-screen bg-gray-900 text-white p-8 pt-16">
       <h1 className="text-3xl font-bold mb-6">Plats</h1>
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <ul className="flex flex-wrap gap-6">
         {dishes.map((dish) => (
-          <li key={dish.id} className="bg-white  rounded-lg shadow-lg hover:shadow-xl transition duration-300 cursor-pointer">
+          <li key={dish.id} className="bg-gray-700 rounded-lg shadow-lg hover:shadow-xl transition duration-300 cursor-pointer" style={{ width: '350px', maxHeight: '500px', overflow: 'hidden' }}>
             <div onClick={() => handleDishClick(dish.id)} className="flex flex-col items-center p-4">
               <div className="w-full">
                 <img src={dish.image} alt={dish.name} className="w-full h-48 object-cover rounded-t-lg"/>
               </div>
               <div className="w-full p-4">
-                <h2 className="text-xl font-bold mb-2">{dish.name}</h2>
-                <p className="text-gray-700 mb-2">{dish.description}</p>
-                <p className="text-gray-900 font-semibold">Prix: {dish.price} €</p>
-                <p className="text-gray-600">Type: {dish.type}</p>
-                <p className="text-gray-600">Disponible jusqu'à: {dish.available_until}</p>
+                <h2 className="text-gray-100 text-xl font-bold mb-2">{dish.name}</h2>
+                <p className="text-gray-100 mb-2 truncate">{dish.description}</p>
+                <p className="text-gray-100 font-semibold">Prix: {dish.price} €</p>
+                <p className="text-gray-100">Type: {dish.type}</p>
+                <p className="text-gray-100">Disponible jusqu'à: {dish.available_until}</p>
               </div>
             </div>
             <button
               onClick={() => handleAddToCart(dish)}
-              className="w-full p-2 bg-blue-500 text-white rounded-b-lg hover:bg-blue-700 transition duration-300"
+              className="w-full p-2 bg-green-500 text-white rounded-b-lg hover:bg-green-700 transition duration-300"
             >
               Commander
             </button>
           </li>
         ))}
       </ul>
-
       <h2 className="text-2xl font-bold mt-8">Panier</h2>
       <Cart cart={cart} setCart={setCart} />
     </div>

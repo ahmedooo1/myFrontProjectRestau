@@ -10,8 +10,10 @@ const AdminDishes = () => {
     price: '',
     type: '',
     available_until: '',
-    image: null
+    image: null,
+    category_id: ''
   });
+  const [editingDish, setEditingDish] = useState(null);
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -28,6 +30,7 @@ const AdminDishes = () => {
         toast.error('Erreur lors de la récupération des plats.');
       }
     };
+
     fetchDishes();
   }, [token]);
 
@@ -47,6 +50,7 @@ const AdminDishes = () => {
     formData.append('price', newDish.price);
     formData.append('type', newDish.type);
     formData.append('available_until', newDish.available_until);
+    formData.append('category_id', newDish.category_id);
     if (newDish.image) {
       formData.append('image', newDish.image);
     }
@@ -65,7 +69,8 @@ const AdminDishes = () => {
         price: '',
         type: '',
         available_until: '',
-        image: null
+        image: null,
+        category_id: ''
       });
       // Re-fetch dishes
       const response = await axios.get('http://localhost:8000/api/restaurateur/dishes', {
@@ -80,31 +85,87 @@ const AdminDishes = () => {
     }
   };
 
-  const handleDeleteDish = async (dishId) => {
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-      console.error('No token found');
-      toast.error('Vous devez être connecté pour supprimer un plat.');
-      return;
+  const handleUpdateDish = async (dishId) => {
+    const formData = new FormData();
+    formData.append('name', newDish.name);
+    formData.append('description', newDish.description);
+    formData.append('price', newDish.price);
+    formData.append('type', newDish.type);
+    formData.append('available_until', newDish.available_until);
+    formData.append('category_id', newDish.category_id);
+    if (newDish.image) {
+      formData.append('image', newDish.image);
     }
 
     try {
-      const response = await axios.delete(`http://localhost:8000/api/restaurateur/dishes/${dishId}`, {
+      await axios.put(`http://localhost:8000/api/restaurateur/dishes/${dishId}`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      toast.success('Plat mis à jour avec succès.');
+      setNewDish({
+        name: '',
+        description: '',
+        price: '',
+        type: '',
+        available_until: '',
+        image: null,
+        category_id: ''
+      });
+      // Re-fetch dishes
+      const response = await axios.get('http://localhost:8000/api/restaurateur/dishes', {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
-      console.log('Dish deleted', response.data);
-      toast.success('Plat supprimé avec succès.');
-      setDishes(dishes.filter(dish => dish.id !== dishId));
+      setDishes(response.data);
     } catch (error) {
-      console.error('Erreur lors de la suppression du plat', error.response ? error.response.data : error.message);
-      if (error.response && error.response.status === 409) {
-        toast.error('Impossible de supprimer le plat car il est référencé par d\'autres enregistrements.');
-      } else {
-        toast.error('Erreur lors de la suppression du plat.');
-      }
+      console.error('Erreur lors de la mise à jour du plat', error);
+      toast.error('Erreur lors de la mise à jour du plat.');
+    }
+  };
+
+  const handleDeleteDish = async (dishId) => {
+    try {
+      await axios.delete(`http://localhost:8000/api/restaurateur/dishes/${dishId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      toast.success('Plat supprimé avec succès.');
+      // Re-fetch dishes
+      const response = await axios.get('http://localhost:8000/api/restaurateur/dishes', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setDishes(response.data);
+    } catch (error) {
+      console.error('Erreur lors de la suppression du plat', error);
+      toast.error('Erreur lors de la suppression du plat.');
+    }
+  };
+
+  const startEditingDish = (dish) => {
+    setNewDish({
+      name: dish.name,
+      description: dish.description,
+      price: dish.price,
+      type: dish.type,
+      available_until: dish.available_until,
+      image: null,
+      category_id: dish.category_id
+    });
+    setEditingDish(dish.id);
+  };
+
+  const handleSaveDish = () => {
+    if (editingDish) {
+      handleUpdateDish(editingDish);
+    } else {
+      handleAddDish();
     }
   };
 
@@ -172,10 +233,10 @@ const AdminDishes = () => {
         </div>
         <button
           type="button"
-          onClick={handleAddDish}
+          onClick={handleSaveDish}
           className="mt-4 p-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
         >
-          Ajouter un plat
+          {editingDish ? 'Mettre à jour le plat' : 'Ajouter un plat'}
         </button>
       </form>
       <ul className="mt-8 space-y-4">
@@ -187,6 +248,12 @@ const AdminDishes = () => {
             <div>
               <strong>{dish.name}</strong> - {dish.description} - {dish.price}€ - {dish.type} - Disponible jusqu'au {dish.available_until}
             </div>
+            <button
+              onClick={() => startEditingDish(dish)}
+              className="mt-2 p-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
+            >
+              Modifier
+            </button>
             <button
               onClick={() => handleDeleteDish(dish.id)}
               className="mt-2 p-2 bg-red-500 text-white rounded hover:bg-red-700 transition duration-300"

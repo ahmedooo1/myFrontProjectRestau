@@ -7,6 +7,14 @@ function Cart({ cart, setCart }) {
   const [total, setTotal] = useState(0);
   const [orders, setOrders] = useState([]);
   const [user, setUser] = useState(null);
+  const [clientName, setClientName] = useState('');
+  const [clientEmail, setClientEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [clientInfoEntered, setClientInfoEntered] = useState(false);
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
 
@@ -31,9 +39,24 @@ function Cart({ cart, setCart }) {
     toast.success('Plat retiré du panier.');
   };
 
+  const validateClientInfo = () => {
+    if (!clientName || !clientEmail || !address || !city || !postalCode || !paymentMethod) {
+      toast.error('Veuillez remplir tous les champs requis.');
+      return false;
+    }
+    return true;
+  };
+
   const handleOrder = async () => {
-    const token = localStorage.getItem('token');
+    if (!validateClientInfo()) return;
+
     const orderData = {
+      client_name: clientName,
+      client_email: clientEmail,
+      address: address,
+      city: city,
+      postal_code: postalCode,
+      payment_method: paymentMethod,
       items: cart.map(item => ({
         dish_id: item.id, // Assuming each item has an `id` field
         quantity: item.quantity
@@ -43,7 +66,6 @@ function Cart({ cart, setCart }) {
     try {
       const response = await axios.post('http://localhost:8000/api/orders', orderData, {
         headers: {
-          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });
@@ -82,7 +104,7 @@ function Cart({ cart, setCart }) {
       console.log('Orders:', response.data);
     } catch (error) {
       console.error('Erreur lors de la récupération des commandes', error);
-      toast.error('Erreur lors de la récupération des commandes.');
+   //   toast.error('Erreur lors de la récupération des commandes.');
     }
   }, [token]);
 
@@ -100,12 +122,28 @@ function Cart({ cart, setCart }) {
         setUser(response.data);
       } catch (error) {
         console.error('Erreur lors de la récupération du profil utilisateur', error);
-        toast.error('Erreur lors de la récupération du profil utilisateur.');
-        navigate('/login');
+       // toast.error('Erreur lors de la récupération du profil utilisateur.');
+       // navigate('/login');
       }
     };
     fetchUser();
   }, [navigate]);
+
+  const handlePlaceOrderClick = () => {
+    if (!clientInfoEntered) {
+      setShowModal(true);
+    } else {
+      handleOrder();
+    }
+  };
+
+  const handleConfirmClientInfo = () => {
+    if (validateClientInfo()) {
+      setClientInfoEntered(true);
+      setShowModal(false);
+      handleOrder();
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-800 p-8">
@@ -139,12 +177,99 @@ function Cart({ cart, setCart }) {
       </ul>
 
       <h2 className="text-2xl font-bold mt-8">Total: ${total}</h2>
+
       <button
-        onClick={handleOrder}
-        className="mt-4 p-4 bg-green-500 text-white rounded hover:bg-green-700 transition duration-300"
+        onClick={handlePlaceOrderClick}
+        className="mt-4 w-full p-4 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
       >
         Passer la commande
       </button>
+
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-gray-700 p-6 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-bold mb-4">Informations du client</h2>
+            <div className="mb-4">
+              <label className="block mb-2 text-sm font-bold">Nom:</label>
+              <input
+                type="text"
+                value={clientName}
+                onChange={(e) => setClientName(e.target.value)}
+                required
+                className="w-full bg-gray-700 p-2 border rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-2 text-sm font-bold">Email:</label>
+              <input
+                type="email"
+                value={clientEmail}
+                onChange={(e) => setClientEmail(e.target.value)}
+                required
+                className="w-full bg-gray-700 p-2 border rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-2 text-sm font-bold">Adresse:</label>
+              <input
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                required
+                className="w-full bg-gray-700 p-2 border rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-2 text-sm font-bold">Ville:</label>
+              <input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                required
+                className="w-full bg-gray-700 p-2 border rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-2 text-sm font-bold">Code postal:</label>
+              <input
+                type="text"
+                value={postalCode}
+                onChange={(e) => setPostalCode(e.target.value)}
+                required
+                className="w-full bg-gray-700 p-2 border rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-2 text-sm font-bold">Méthode de paiement:</label>
+              <select
+                value={paymentMethod}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+                required
+                className="w-full bg-gray-700 p-2 border rounded"
+              >
+                <option value="">Sélectionner une méthode de paiement</option>
+                <option value="credit_card">Carte de crédit</option>
+                <option value="paypal">PayPal</option>
+                <option value="cash">Espèces</option>
+              </select>
+            </div>
+            <div className="mt-4 flex justify-end">
+              <button
+                onClick={() => setShowModal(false)}
+                className="mr-4 p-2 bg-gray-600 rounded hover:bg-gray-400 transition duration-300"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={handleConfirmClientInfo}
+                className="p-2 bg-green-500 text-white rounded hover:bg-green-700 transition duration-300"
+              >
+                Confirmer
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <h1 className="text-3xl font-bold mt-8">Commandes</h1>
       <ul className="space-y-4">
@@ -190,3 +315,4 @@ function Cart({ cart, setCart }) {
 }
 
 export default Cart;
+

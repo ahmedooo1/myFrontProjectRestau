@@ -188,7 +188,7 @@ function Profile() {
                 Modifier le mot de passe
               </button>
             )}
-          </div>
+       </div>
         ) : (
           <p className="text-center text-gray-600">Chargement...</p>
         )}
