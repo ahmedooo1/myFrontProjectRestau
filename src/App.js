@@ -15,6 +15,7 @@ import AdminDishes from './components/AdminDishes';
 import Home from './components/Home';
 import Footer from './components/Footer';
 import About from './components/About';
+import Contact from './components/Contact';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/panier" element={<Panier />} />
         <Route path="/admin/dishes" element={<AdminDishes />} />
         <Route path="/About" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
     </Router>

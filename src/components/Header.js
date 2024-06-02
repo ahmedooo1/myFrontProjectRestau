@@ -67,6 +67,13 @@ function Header() {
             >
               Panier
             </Link>
+            <Link
+              to="/contact"
+              className="block md:inline-block flex items-center hover:text-yellow-400 py-2 md:py-0 px-4"
+              onClick={() => setIsOpen(false)}
+            >
+              Contact
+            </Link>
           </nav>
         </div>
       </header>
@@ -75,4 +82,3 @@ function Header() {
 }
 
 export default Header;
-
