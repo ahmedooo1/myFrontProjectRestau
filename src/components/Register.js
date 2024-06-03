@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { setCookie } from '../utils/cookieUtils'; // Add this import
 
 function Register() {
   const [username, setName] = useState('');
@@ -23,7 +24,7 @@ function Register() {
           'Content-Type': 'application/json'
         }
       });
-      console.log('Registration response:', response.data);
+      setCookie('token', response.data.token); // Set cookie
       toast.success('Inscription réussie!');
       navigate('/login');
     } catch (error) {
@@ -38,9 +39,10 @@ function Register() {
 
   const handleGoogleSuccess = async (response) => {
     try {
-      await axios.get(`http://localhost:8000/api/google-callback?code=${response.code}`);
+      const res = await axios.get(`http://localhost:8000/api/google-callback?code=${response.code}`);
+      setCookie('token', res.data.token); // Set cookie
       toast.success('Authentification Google réussie!');
-      navigate('/profile'); // Redirigez vers le tableau de bord ou une autre page
+      navigate('/profile');
     } catch (error) {
       toast.error('Erreur lors de l\'authentification Google. Veuillez réessayer.');
       console.error('Erreur lors de l\'authentification Google', error);

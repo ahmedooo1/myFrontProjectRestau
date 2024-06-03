@@ -16,11 +16,12 @@ import Home from './components/Home';
 import Footer from './components/Footer';
 import About from './components/About';
 import Contact from './components/Contact';
+import CookieConsent from './components/CookieConsent'; // Import CookieConsent
 
 function App() {
   return (
     <Router>
-      <Header /> 
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dishes" element={<Dishes />} />
@@ -37,6 +38,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
+      <CookieConsent />
     </Router>
   );
 }

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { setCookie } from '../utils/cookieUtils'; // Add this import
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -14,6 +15,7 @@ function Login() {
     try {
       const response = await axios.post('http://localhost:8000/api/login', { email, password });
       localStorage.setItem('token', response.data.token);
+      setCookie('token', response.data.token); // Set cookie
       toast.success('Connexion réussie!');
       navigate('/profile');
     } catch (error) {
@@ -26,6 +28,7 @@ function Login() {
     try {
       const res = await axios.get(`http://localhost:8000/api/google-callback?code=${response.code}`);
       localStorage.setItem('token', res.data.token);
+      setCookie('token', res.data.token); // Set cookie
       toast.success('Authentification Google réussie!');
       navigate('/profile');
     } catch (error) {
@@ -90,3 +93,4 @@ function Login() {
 }
 
 export default Login;
+
