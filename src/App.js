@@ -17,26 +17,32 @@ import Footer from './components/Footer';
 import About from './components/About';
 import Contact from './components/Contact';
 import CookieConsent from './components/CookieConsent'; // Import CookieConsent
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe('your-publishable-key-here');
 
 function App() {
   return (
     <Router>
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/dishes" element={<Dishes />} />
-        <Route path="/dishes/:id" element={<DishDetails />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<PrivateRoute component={Profile} />} />
-        <Route path="/ForgotPassword" element={<ForgotPassword />} />
-        <Route path="/reset-password/:token" element={<ResetPassword />} />
-        <Route path="/panier" element={<Panier />} />
-        <Route path="/admin/dishes" element={<AdminDishes />} />
-        <Route path="/About" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
+      <Elements stripe={stripePromise}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/dishes" element={<Dishes />} />
+          <Route path="/dishes/:id" element={<DishDetails />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<PrivateRoute component={Profile} />} />
+          <Route path="/ForgotPassword" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/panier" element={<Panier />} />
+          <Route path="/admin/dishes" element={<AdminDishes />} />
+          <Route path="/About" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </Elements>
       <Footer />
       <CookieConsent />
     </Router>

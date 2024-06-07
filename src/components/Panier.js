@@ -62,7 +62,8 @@ function Panier() {
       items: cart.map(item => ({
         dish_id: item.id, // Assuming each item has an `id` field
         quantity: item.quantity
-      }))
+      })),
+      total_amount: total 
     };
 
     try {
@@ -314,4 +315,6 @@ function Panier() {
 }
 
 export default Panier;
+
+
 

@@ -46,7 +46,7 @@ function Dishes() {
           <li key={dish.id} className="bg-gray-700 rounded-lg shadow-lg hover:shadow-xl transition duration-300 cursor-pointer" style={{ width: '350px', maxHeight: '500px', overflow: 'hidden' }}>
             <div onClick={() => handleDishClick(dish.id)} className="flex flex-col items-center p-4">
               <div className="w-full">
-                <img src={dish.image} alt={dish.name} className="w-full h-48 object-cover rounded-t-lg"/>
+                {dish.image && <img src={dish.image} alt={dish.name} className="w-full h-48 object-cover rounded-t-lg" />}
               </div>
               <div className="w-full p-4">
                 <h2 className="text-gray-100 text-xl font-bold mb-2">{dish.name}</h2>
@@ -54,6 +54,7 @@ function Dishes() {
                 <p className="text-gray-100 font-semibold">Prix: {dish.price} €</p>
                 <p className="text-gray-100">Type: {dish.type}</p>
                 <p className="text-gray-100">Disponible jusqu'à: {dish.available_until}</p>
+                {dish.category && <p className="text-gray-100">Catégorie: {dish.category.name}</p>}
               </div>
             </div>
             <button

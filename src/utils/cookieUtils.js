@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie';
 
 // Créer un cookie
 export const setCookie = (name, value, days) => {

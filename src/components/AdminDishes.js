@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 const AdminDishes = () => {
   const [dishes, setDishes] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [newDish, setNewDish] = useState({
     name: '',
     description: '',
@@ -32,7 +33,22 @@ const AdminDishes = () => {
       }
     };
 
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/categories', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setCategories(response.data);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des catégories', error);
+        toast.error('Erreur lors de la récupération des catégories.');
+      }
+    };
+
     fetchDishes();
+    fetchCategories();
   }, [token]);
 
   const handleInputChange = (e) => {
@@ -99,41 +115,30 @@ const AdminDishes = () => {
       toast.error('Erreur lors de l\'ajout du plat.');
     }
   };
-
+  console.log(newDish);
   const handleUpdateDish = async (dishId) => {
     try {
+      const formData = new FormData();
+      formData.append('name', newDish.name);
+      formData.append('description', newDish.description);
+      formData.append('price', newDish.price);
+      formData.append('type', newDish.type);
+      formData.append('available_until', newDish.available_until);
+      formData.append('category_id', newDish.category_id);
       if (newDish.image) {
-        const formData = new FormData();
-        formData.append('name', newDish.name);
-        formData.append('description', newDish.description);
-        formData.append('price', newDish.price);
-        formData.append('type', newDish.type);
-        formData.append('available_until', newDish.available_until);
-        formData.append('category_id', newDish.category_id);
         formData.append('image', newDish.image);
-
-        await axios.put(`http://localhost:8000/api/restaurateur/dishes/${dishId}`, formData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-      } else {
-        const urlEncodedData = new URLSearchParams();
-        urlEncodedData.append('name', newDish.name);
-        urlEncodedData.append('description', newDish.description);
-        urlEncodedData.append('price', newDish.price);
-        urlEncodedData.append('type', newDish.type);
-        urlEncodedData.append('available_until', newDish.available_until);
-        urlEncodedData.append('category_id', newDish.category_id);
-
-        await axios.put(`http://localhost:8000/api/restaurateur/dishes/${dishId}`, urlEncodedData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        });
       }
+
+      console.log(`Updating dish with ID: ${dishId}`);
+      console.log('FormData:', formData);
+
+      await axios.put(`http://localhost:8000/api/restaurateur/dishes/${dishId}`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
       toast.success('Plat mis à jour avec succès.');
       setNewDish({
         name: '',
@@ -360,6 +365,22 @@ const AdminDishes = () => {
             </div>
           )}
         </div>
+        <div>
+          <label className="block text-gray-700">Catégorie:</label>
+          <select
+            value={newDish.category_id}
+            onChange={handleInputChange}
+            name="category_id"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+          >
+            <option value="">Sélectionner une catégorie</option>
+            {categories.map(category => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </div>
         <button
           type="button"
           onClick={handleSaveDish}
@@ -376,6 +397,9 @@ const AdminDishes = () => {
             )}
             <div>
               <strong>{dish.name}</strong> - {dish.description} - {dish.price}€ - {dish.type} - Disponible jusqu'au {dish.available_until}
+            </div>
+            <div className="mt-2">
+              <span className="font-bold">Catégorie:</span> {dish.category ? dish.category.name : 'Non catégorisé'}
             </div>
             <button
               onClick={() => startEditingDish(dish)}

@@ -43,7 +43,6 @@ function Login() {
   };
 
   return (
-    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
       <div className="min-h-screen bg-gray-800 flex items-center justify-center">
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
           <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Connexion</h1>
@@ -77,20 +76,22 @@ function Login() {
             </button>
           </form>
           <div className="mt-4">
+          <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+
             <GoogleLogin
               onSuccess={handleGoogleSuccess}
               onFailure={handleGoogleFailure}
               buttonText="Se connecter avec Google"
             />
+                </GoogleOAuthProvider>
+
           </div>
           <p className="text-center text-gray-600 mt-4">
             Pas encore de compte? <Link to="/register" className="text-blue-500 hover:underline">Inscrivez-vous</Link>
           </p>
         </div>
       </div>
-    </GoogleOAuthProvider>
   );
 }
 
 export default Login;
-

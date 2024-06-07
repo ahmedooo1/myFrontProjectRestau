@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 function Cart({ cart, setCart }) {
   const [total, setTotal] = useState(0);
@@ -17,6 +18,8 @@ function Cart({ cart, setCart }) {
   const [clientInfoEntered, setClientInfoEntered] = useState(false);
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
+  const stripe = useStripe();
+  const elements = useElements();
 
   useEffect(() => {
     const calculateTotal = () => {
@@ -57,6 +60,7 @@ function Cart({ cart, setCart }) {
       city: city,
       postal_code: postalCode,
       payment_method: paymentMethod,
+      total_amount: total, // Include the total amount
       items: cart.map(item => ({
         dish_id: item.id, // Assuming each item has an `id` field
         quantity: item.quantity
@@ -69,12 +73,44 @@ function Cart({ cart, setCart }) {
           'Content-Type': 'application/json'
         }
       });
-      console.log('Order created', response.data);
-      toast.success('Commande passée avec succès.');
+
+      const createdOrder = response.data;
+      toast.success('Commande créée avec succès!');
+
+      if (paymentMethod === 'credit_card') {
+        const cardElement = elements.getElement(CardElement);
+        const { paymentMethod, error } = await stripe.createPaymentMethod({
+          type: 'card',
+          card: cardElement,
+          billing_details: {
+            name: clientName,
+            email: clientEmail,
+            address: {
+              line1: address,
+              city: city,
+              postal_code: postalCode,
+            },
+          },
+        });
+
+        if (error) {
+          console.error('Erreur lors de la création du mode de paiement', error);
+          toast.error('Erreur lors de la création du mode de paiement.');
+          return;
+        }
+
+        const paymentResponse = await axios.post('http://localhost:8000/api/payments/stripe', {
+          order_id: createdOrder.id,
+          payment_method_id: paymentMethod.id,
+        });
+
+        console.log('Payment successful:', paymentResponse.data);
+      }
+
       setCart([]);
     } catch (error) {
-      console.error('Erreur lors de la passation de la commande', error.response ? error.response.data : error.message);
-      toast.error('Erreur lors de la passation de la commande.');
+      console.error('Erreur lors de la passation de la commande ou du paiement', error.response ? error.response.data : error.message);
+      toast.error('Erreur lors de la passation de la commande ou du paiement.');
     }
   };
 
@@ -89,7 +125,7 @@ function Cart({ cart, setCart }) {
       setOrders(orders.filter(order => order.id !== orderId));
     } catch (error) {
       console.error('Erreur lors de la suppression de la commande', error.response ? error.response.data : error.message);
-      toast.error('Erreur lors de la suppression de la commande.');
+    //  toast.error('Erreur lors de la suppression de la commande.');
     }
   };
 
@@ -104,7 +140,7 @@ function Cart({ cart, setCart }) {
       console.log('Orders:', response.data);
     } catch (error) {
       console.error('Erreur lors de la récupération des commandes', error);
-   //   toast.error('Erreur lors de la récupération des commandes.');
+     // toast.error('Erreur lors de la récupération des commandes.');
     }
   }, [token]);
 
@@ -122,7 +158,7 @@ function Cart({ cart, setCart }) {
         setUser(response.data);
       } catch (error) {
         console.error('Erreur lors de la récupération du profil utilisateur', error);
-       // toast.error('Erreur lors de la récupération du profil utilisateur.');
+      //  toast.error('Erreur lors de la récupération du profil utilisateur.');
        // navigate('/login');
       }
     };
@@ -180,14 +216,14 @@ function Cart({ cart, setCart }) {
 
       <button
         onClick={handlePlaceOrderClick}
-        className="mt-4 w-full p-4 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
+        className="mt-4 p-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
       >
         Passer la commande
       </button>
 
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-gray-700 p-6 rounded-lg shadow-lg">
+          <div className="bg-gray-800 p-8 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold mb-4">Informations du client</h2>
             <div className="mb-4">
               <label className="block mb-2 text-sm font-bold">Nom:</label>
@@ -253,6 +289,12 @@ function Cart({ cart, setCart }) {
                 <option value="cash">Espèces</option>
               </select>
             </div>
+            {paymentMethod === 'credit_card' && (
+              <div className="mb-4">
+                <label className="block mb-2 text-sm font-bold">Informations de la carte:</label>
+                <CardElement className="p-2 border rounded" />
+              </div>
+            )}
             <div className="mt-4 flex justify-end">
               <button
                 onClick={() => setShowModal(false)}
@@ -315,4 +357,3 @@ function Cart({ cart, setCart }) {
 }
 
 export default Cart;
-

@@ -38,12 +38,13 @@ function DishDetails() {
   return (
     <div className="min-h-screen bg-gray-800 text-white p-8">
       <div className="max-w-4xl mx-auto bg-gray-700 text-white rounded-lg shadow-lg overflow-hidden mt-14">
-        <img src={dish.image} alt={dish.name} className="w-full h-64 object-cover" />
+        {dish.image && <img src={dish.image} alt={dish.name} className="w-full h-64 object-cover" />}
         <div className="p-6">
           <h1 className="text-4xl font-extrabold mb-6 text-yellow-400">{dish.name}</h1>
           <p className="text-lg mb-4">{dish.description}</p>
           <p className="text-lg font-semibold mb-4">Prix: <span className="text-yellow-300">${dish.price}</span></p>
           <p className="text-lg">Type: <span className="text-yellow-300">{dish.type}</span></p>
+          <p className="text-lg">Catégorie : <span className="text-yellow-300">{dish.category ? dish.category.name : ''}</span></p>
           <p className="text-lg">Disponible jusqu'à: <span className="text-yellow-300">{dish.available_until}</span></p>
           <button
             onClick={handleAddToCart}
