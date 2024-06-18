@@ -47,7 +47,7 @@
             <p class="text-lg mb-4">
               THE CHEF est un restaurant de renommée offrant une expérience culinaire exceptionnelle. Notre équipe de chefs talentueux utilise les meilleurs ingrédients pour créer des plats délicieux et innovants. Venez découvrir notre menu varié et savourez chaque bouchée.
             </p>
-            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4 transition duration-300 ease-in-out transform hover:scale-105">En savoir plus</button>
+            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4 transition duration-300 ease-in-out transform hover:scale-105" @click="$router.push('/about')">En savoir plus</button>
           </div>
         </div>
       </div>
@@ -189,6 +189,7 @@ export default {
 .bg-image {
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   width: 100%;
   height: 100%;
   position: absolute;
