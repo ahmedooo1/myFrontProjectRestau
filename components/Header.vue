@@ -4,7 +4,7 @@
     <button @click="toggleMenu" class="md:hidden">
       <img width="30" height="30" src="https://img.icons8.com/ios-filled/50/FFFFFF/menu--v1.png" alt="menu" />
     </button>
-    <nav :class="{'block p-3 rounded-b-lg': isMenuOpen , 'hidden': !isMenuOpen}" class="w-full md:flex md:items-center md:w-auto md:static absolute top-16 right-0 bg-gray-800 md:bg-transparent ">
+    <nav :class="{'block p-3 rounded-b-lg': isMenuOpen , 'hidden': !isMenuOpen}" class="w-full md:flex md:items-center md:w-auto md:static absolute top-16 right-0 bg-gray-800 md:bg-transparent z-10 ">
       <ul class="flex flex-col md:flex-row md:space-x-4">
         <li>
           <router-link to="/" class="flex items-center " title="Accueil">
@@ -19,6 +19,11 @@
         <li v-if="$auth.loggedIn && $auth.user.roles.includes('ROLE_ADMIN')">
           <router-link to="/admin/menu" class="flex items-center" title="Menu Admin">
             <img width="30" height="30" src="https://img.icons8.com/windows/32/FFFFFF/circled-menu.png" alt="circled-menu" class="mr-2"/>Menu Admin
+          </router-link>
+        </li>
+        <li v-if="$auth.loggedIn">
+          <router-link to="/menus" class="flex items-center" title="Menu Admin">
+            <img width="30" height="30" src="https://img.icons8.com/wired/64/FFFFFF/list--v1.png" alt="list--v1" class="mr-2"/>Menu
           </router-link>
         </li>
         <li v-if="$auth.loggedIn">
@@ -42,7 +47,7 @@
           </button>
         </li>
         <li v-if="$auth.loggedIn">
-          <button @click="logout" class="bg-red-500 p-1 rounded flex items-center" title="Déconnexion">
+          <button @click="logout" class="bg-red-500 px-2 py-1 rounded-full flex items-center" title="Déconnexion">
             <img width="30" height="30" src="https://img.icons8.com/pixels/32/FFFFFF/exit.png" alt="exit" class="mr-2"/>Déconnexion
           </button>
         </li>
@@ -84,9 +89,7 @@ export default {
 </script>
 
 <style scoped>
-header {
-  background-color: #2d3748;
-}
+
 
 @media (min-width: 768px) {
   .md\\:flex {

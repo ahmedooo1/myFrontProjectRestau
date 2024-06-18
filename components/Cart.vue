@@ -1,19 +1,25 @@
 <template>
-  <div>
-    <h1 class="text-3xl font-bold mb-4">Articles du Menu</h1>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <div v-for="item in menuItems" :key="item.id" class="bg-white rounded-lg shadow-md p-4 mb-4 cursor-pointer" @click="goToDetails(item.id)">
-        <img :src="getImageUrl(item.image_url)" alt="Image de l'article du menu" class="w-full h-48 object-cover rounded-t-lg">
-        <div class="p-4">
-          <h2 class="text-2xl font-semibold">{{ item.name }}</h2>
-          <p>{{ item.description }}</p>
-          <p class="text-lg font-bold">{{ item.price }} €</p>
-          <button v-if="$auth.loggedIn" @click.stop="addToCart(item)" class="bg-green-500 text-white px-4 py-2 rounded mt-2">
-            <img width="25" height="25" src="https://img.icons8.com/windows/32/FFFFFF/add-to-shopping-basket.png" alt="add-to-shopping-basket"/>
-          </button>
-        </div>
+  <div class="container mx-auto mt-8 p-4 max-w-2xl">
+    <h2 class="text-2xl font-bold mb-4">Votre Panier</h2>
+    <div v-if="cartItems.length === 0">Votre panier est vide.</div>
+    <div v-for="(item, index) in cartItems" :key="generateUniqueKey(item, index)" class="bg-white rounded-lg shadow-md p-4 mb-4">
+      <img :src="getImageUrl(item.image_url)" alt="Image de l'article" class="w-full h-32 object-cover rounded-t-lg">
+      <div class="p-4">
+        <h3 class="text-xl font-semibold">{{ item.name }}</h3>
+        <p>{{ item.description }}</p>
+        <p class="text-lg font-bold">{{ item.price }} €</p>
+        <p class="text-lg">Quantité : {{ item.quantity }}</p>
+        <button @click="removeItem(item)" :disabled="item.loading" class="bg-red-500 text-white px-4 py-2 rounded mt-4 flex items-center">
+          <img width="20" height="20" src="https://img.icons8.com/ios/50/FFFFFF/delete--v1.png" alt="delete--v1"
+          />
+          {{ item.loading ? 'En cours...': '' }}
+        </button>
       </div>
     </div>
+    <button @click="emptyCart" :disabled="emptyingCart" class="bg-red-500 text-white px-4 py-2 rounded mt-4">
+      {{ emptyingCart ? 'En cours...' : 'Vider le panier' }}
+    </button>
+    <button @click="placeOrder" class="bg-blue-500 text-white px-4 py-2 rounded mt-4 flex">Passer la commande <img class="ml-3" width="30" height="30" src="https://img.icons8.com/ios/50/FFFFFF/credit-card-front.png" alt="credit-card-front"/></button>
   </div>
 </template>
 
@@ -21,35 +27,62 @@
 export default {
   data() {
     return {
-      menuItems: []
+      cartItems: [],
+      emptyingCart: false
     }
   },
-  async fetch() {
-    if (!this.menuItems.length) {
-      const response = await this.$axios.get('/menu')
-      this.menuItems = response.data
-    }
+  async mounted() {
+    await this.fetchCartItems();
   },
   methods: {
+    async fetchCartItems() {
+      const response = await this.$axios.get(`/carts?userId=${this.$auth.user.id}`);
+      this.cartItems = response.data.map((item, index) => ({ ...item, loading: false, uniqueKey: `${item.cartId}-${item.menuItemId}-${index}` }));
+    },
     getImageUrl(imagePath) {
       return `http://127.0.0.1:8000${imagePath}`;
     },
-    async addToCart(item) {
+    generateUniqueKey(item, index) {
+      return `${item.cartId}-${item.menuItemId}-${index}`;
+    },
+    async removeItem(item) {
+      item.loading = true;
       try {
-        const payload = {
-          userId: this.$auth.user.id,
-          menuItemId: item.id,
-          quantity: 1
-        };
-        await this.$axios.post('/carts', payload);
-        alert('Item added to cart');
+        await this.$axios.delete('/cart/item', {
+          data: { userId: this.$auth.user.id, menuItemId: item.menuItemId, cartId: item.cartId }
+        });
+        await this.fetchCartItems();
       } catch (error) {
-        console.error('Failed to add item to cart', error);
+        console.error('Failed to remove item from cart', error);
+      } finally {
+        item.loading = false;
       }
     },
-    goToDetails(id) {
-      this.$router.push({ path: `/menu/${id}` });
+    async emptyCart() {
+      this.emptyingCart = true;
+      try {
+        await this.$axios.post('/cart/empty', {
+          userId: this.$auth.user.id
+        });
+        await this.fetchCartItems();
+      } catch (error) {
+        console.error('Failed to empty cart', error);
+      } finally {
+        this.emptyingCart = false;
+      }
+    },
+    async placeOrder() {
+      const totalAmount = this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0) * 100; // convert to cents
+      if (totalAmount == 0) {
+        alert('ajouter une commande !');
+      } else {
+        this.$router.push({ path: `/payment/${totalAmount}` });
+      }
     }
   }
 }
 </script>
+
+<style scoped>
+/* Add your styles here */
+</style>

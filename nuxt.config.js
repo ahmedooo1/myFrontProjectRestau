@@ -25,20 +25,24 @@ export default {
   ],
 
   // Plugins to run before rendering page
-  plugins: [],
+  plugins: [
+  ],
 
   // Auto import components
   components: true,
 
   // Modules for dev and build
-  buildModules: [],
+  buildModules: [
+  ],
 
   // Modules
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     '@nuxtjs/tailwindcss',
+
   ],
+
 
   axios: {
     baseURL: 'http://localhost:8000/api', // Replace with your API base URL
@@ -106,17 +110,38 @@ export default {
         name: 'admin-menu',
         path: '/admin/menu',
         component: resolve(__dirname, 'pages/admin/Menu.vue')
-      });
-      routes.push({
+      },
+      {
         name: 'payment-amount',
         path: '/payment/:amount',
         component: resolve(__dirname, 'pages/payment/[amount].vue')
-      });
-      routes.push({
+      },
+      {
         name: 'menu-details',
         path: '/menu/:id',
         component: resolve(__dirname, 'pages/menu/_id.vue')
-      });
+      },
+        {
+          name: 'mentions-legales',
+          path: '/mentions-legales',
+          component: resolve(__dirname, 'pages/MentionLegales.vue')
+        },
+        {
+          name: 'politique-confidentialite',
+          path: '/politique-confidentialite',
+          component: resolve(__dirname, 'pages/politique-confidentialite.vue')
+        },
+        {
+          name: 'request-reset-password',
+          path: '/request-reset-password',
+          component: resolve(__dirname, 'pages/request-reset-password.vue')
+        },
+        {
+          name: 'reset-password',
+          path: '/reset-password/:token',
+          component: resolve(__dirname, 'pages/reset-password/_token.vue')
+        }
+      );
     }
   }
 }
