@@ -2,17 +2,16 @@
   <div class="container mx-auto mt-8 p-4 max-w-2xl">
     <h2 class="text-2xl font-bold mb-4">Votre Panier</h2>
     <div v-if="cartItems.length === 0">Votre panier est vide.</div>
-    <div v-for="(item, index) in cartItems" :key="generateUniqueKey(item, index)" class="bg-white rounded-lg shadow-md p-4 mb-4">
-      <img :src="getImageUrl(item.image_url)" alt="Image de l'article" class="w-full h-32 object-cover rounded-t-lg">
-      <div class="p-4">
+    <div v-for="(item, index) in cartItems" :key="generateUniqueKey(item, index)" class="flex bg-white rounded-lg shadow-md p-4 mb-4">
+      <img :src="getImageUrl(item.image_url)" alt="Image de l'article" class="w-32 h-32 object-cover rounded-lg mr-4">
+      <div class="flex-grow">
         <h3 class="text-xl font-semibold">{{ item.name }}</h3>
         <p>{{ item.description }}</p>
         <p class="text-lg font-bold">{{ item.price }} €</p>
         <p class="text-lg">Quantité : {{ item.quantity }}</p>
         <button @click="removeItem(item)" :disabled="item.loading" class="bg-red-500 text-white px-4 py-2 rounded mt-4 flex items-center">
-          <img width="20" height="20" src="https://img.icons8.com/ios/50/FFFFFF/delete--v1.png" alt="delete--v1"
-          />
-          {{ item.loading ? 'En cours...': '' }}
+          <img width="20" height="20" src="https://img.icons8.com/ios/50/FFFFFF/delete--v1.png" alt="delete--v1"/>
+          {{ item.loading ? 'En cours...' : 'Supprimer' }}
         </button>
       </div>
     </div>
@@ -48,9 +47,13 @@ export default {
     async removeItem(item) {
       item.loading = true;
       try {
-        await this.$axios.delete('/cart/item', {
-          data: { userId: this.$auth.user.id, menuItemId: item.menuItemId, cartId: item.cartId }
-        });
+        const payload = {
+          userId: this.$auth.user.id,
+          menuItemId: item.menuItemId,
+          cartId: item.cartId
+        };
+        console.log('Payload:', payload);  // Ajoutez cette ligne pour vérifier les données
+        await this.$axios.delete('/cart/item', { data: payload });
         await this.fetchCartItems();
       } catch (error) {
         console.error('Failed to remove item from cart', error);
@@ -84,5 +87,8 @@ export default {
 </script>
 
 <style scoped>
-/* Add your styles here */
+.container {
+  max-width: 800px;
+}
 </style>
+

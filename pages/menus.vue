@@ -1,6 +1,13 @@
 <template>
   <div class="container mx-auto px-6 py-16">
     <h2 class="text-4xl font-bold text-center mb-12">Articles du Menu</h2>
+    <div class="mb-6">
+      <select v-model="selectedCategory" @change="fetchMenuItems">
+        <option v-for="category in categories" :key="category.id" :value="category.id">
+          {{ category.title }}
+        </option>
+      </select>
+    </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
       <div v-for="item in menuItems" :key="item.id" class="bg-white rounded-lg shadow-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer" @click="goToDetails(item.id)">
         <img :src="getImageUrl(item.image_url)" alt="Image de l'article du menu" class="w-full h-48 object-cover rounded-t-lg">
@@ -21,16 +28,34 @@
 export default {
   data() {
     return {
-      menuItems: []
+      categories: [],
+      menuItems: [],
+      selectedCategory: null
     }
   },
   async fetch() {
-    if (!this.menuItems.length) {
-      const response = await this.$axios.get('/menu')
-      this.menuItems = response.data
-    }
+    await this.fetchCategories();
+    await this.fetchMenuItems();
   },
   methods: {
+    async fetchCategories() {
+      try {
+        const response = await this.$axios.get('/categories');
+        this.categories = response.data;
+      } catch (error) {
+        console.error('Failed to fetch categories', error);
+      }
+    },
+    async fetchMenuItems() {
+      try {
+        const response = await this.$axios.get('/menu', {
+          params: { categoryId: this.selectedCategory }
+        });
+        this.menuItems = response.data;
+      } catch (error) {
+        console.error('Failed to fetch menu items', error);
+      }
+    },
     getImageUrl(imagePath) {
       return `http://127.0.0.1:8000${imagePath}`;
     },
@@ -42,7 +67,7 @@ export default {
           quantity: 1
         };
         await this.$axios.post('/carts', payload);
-        alert('Item added to cart');
+        this.$toast.success('Article ajouté au panier');
       } catch (error) {
         console.error('Failed to add item to cart', error);
       }

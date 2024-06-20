@@ -45,9 +45,13 @@ export default {
           }
         })
         console.log('Login successful:', response)
+        this.$toast.success('Connexion réussie!')
+        this.$emit('login-success')
         this.$router.push({ path: '/profile' }) // Redirect to home or desired page
       } catch (error) {
         console.error('Login failed:', error)
+        this.$toast.error('Échec de la connexion. Veuillez vérifier vos informations.')
+
       }
     }
   }

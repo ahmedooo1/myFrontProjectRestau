@@ -12,6 +12,7 @@
           <h2 class="text-2xl font-semibold">{{ item.name }}</h2>
           <p>{{ item.description }}</p>
           <p class="text-lg font-bold">{{ item.price }} €</p>
+          <p class="text-md">{{ item.category.title }}</p>
         </div>
         <div>
           <button @click="editItem(item)" class="bg-yellow-500 text-white px-4 py-2 rounded mr-2">Modifier</button>
@@ -41,6 +42,12 @@
             <label class="block text-gray-700">Image</label>
             <input @change="onFileChange" type="file" class="w-full px-4 py-2 border rounded" />
           </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Catégorie</label>
+            <select v-model="currentItem.category_id" class="w-full px-4 py-2 border rounded">
+              <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.title }}</option>
+            </select>
+          </div>
           <div v-if="error" class="mb-4 text-red-500">{{ error }}</div>
           <div class="flex justify-end">
             <button type="button" @click="closeModal" class="bg-gray-500 text-white px-4 py-2 rounded mr-2">Annuler</button>
@@ -57,6 +64,7 @@ export default {
   data() {
     return {
       menuItems: [],
+      categories: [],
       showAddModal: false,
       showEditModal: false,
       currentItem: {
@@ -64,7 +72,8 @@ export default {
         name: '',
         description: '',
         price: '',
-        image_url: ''
+        image_url: '',
+        category_id: null
       },
       selectedFile: null,
       error: ''
@@ -72,11 +81,20 @@ export default {
   },
   async mounted() {
     await this.fetchMenuItems()
+    await this.fetchCategories()
   },
   methods: {
     async fetchMenuItems() {
       const response = await this.$axios.get('/menu')
       this.menuItems = response.data
+    },
+    async fetchCategories() {
+      try {
+        const response = await this.$axios.get('/categories')
+        this.categories = response.data
+      } catch (error) {
+        console.error('Failed to fetch categories', error)
+      }
     },
     async createMenuItem() {
       if (!this.selectedFile) {
@@ -88,7 +106,8 @@ export default {
         name: this.currentItem.name,
         description: this.currentItem.description,
         price: this.currentItem.price,
-        image_url: ''
+        image_url: '',
+        category_id: this.currentItem.category_id
       }
 
       const reader = new FileReader()
@@ -121,7 +140,8 @@ export default {
         name: this.currentItem.name,
         description: this.currentItem.description,
         price: this.currentItem.price,
-        image_url: this.currentItem.image_url // Conserver l'URL de l'image existante
+        image_url: this.currentItem.image_url, // Conserver l'URL de l'image existante
+        category_id: this.currentItem.category_id
       }
 
       if (this.selectedFile) {
@@ -153,7 +173,7 @@ export default {
       await this.fetchMenuItems()
     },
     editItem(item) {
-      this.currentItem = { ...item }
+      this.currentItem = { ...item, category_id: item.category.id }
       this.showEditModal = true
       this.error = '' // Réinitialiser le message d'erreur
     },
@@ -165,7 +185,8 @@ export default {
         name: '',
         description: '',
         price: '',
-        image_url: ''
+        image_url: '',
+        category_id: null
       }
       this.selectedFile = null
       this.error = '' // Réinitialiser le message d'erreur

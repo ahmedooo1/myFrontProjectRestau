@@ -42,7 +42,7 @@ export default {
           quantity: 1
         };
         await this.$axios.post('/carts', payload);
-        alert('Item added to cart');
+        this.$toast.success('Article ajouté au panier');
       } catch (error) {
         console.error('Failed to add item to cart', error);
       }

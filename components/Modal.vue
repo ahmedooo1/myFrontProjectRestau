@@ -7,12 +7,7 @@
         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div class="sm:flex sm:items-start">
             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-              <!-- <div class="flex justify-between mb-4">
-                <button @click="currentTab = 'login'" :class="{'border-b-2 border-blue-500': currentTab === 'login'}" class="pb-2">Login</button>
-                <button @click="currentTab = 'register'" :class="{'border-b-2 border-blue-500': currentTab === 'register'}" class="pb-2">Register</button>
-                <button @click="currentTab = 'forgotPassword'" :class="{'border-b-2 border-blue-500': currentTab === 'forgotPassword'}" class="pb-2">Forgot Password</button>
-              </div> -->
-              <component :is="currentTabComponent" @switch-tab="currentTab = $event" @close="closeModal" />
+              <component :is="currentTabComponent" @login-success="handleLoginSuccess" @switch-tab="currentTab = $event" @close="closeModal" />
             </div>
           </div>
         </div>
@@ -54,6 +49,9 @@ export default {
   methods: {
     closeModal() {
       this.$emit('close')
+    },
+    handleLoginSuccess() {
+      this.closeModal()
     }
   }
 }

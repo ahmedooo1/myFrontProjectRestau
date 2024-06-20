@@ -68,13 +68,25 @@ export default {
     this.cardElement = elements.create('card');
     this.cardElement.mount('#card-element');
 
-    const response = await this.$axios.post('/payment', { amount: this.$route.params.amount });
-    this.clientSecret = response.data.clientSecret;
+    try {
+      const response = await this.$axios.post('/payment', { amount: this.$route.params.amount });
+      this.clientSecret = response.data.clientSecret;
+      console.log('Client Secret:', this.clientSecret); // Ajout de la vérification du client secret
+    } catch (error) {
+      console.error('Failed to create payment intent:', error);
+      this.error = 'Failed to initialize payment. Please try again.';
+    }
   },
   methods: {
     async handleSubmit() {
       this.processing = true;
       this.error = '';
+      if (!this.clientSecret) {
+        this.error = 'Payment initiation failed. Please try again.';
+        this.processing = false;
+        return;
+      }
+
       const { error, paymentIntent } = await this.stripe.confirmCardPayment(this.clientSecret, {
         payment_method: {
           card: this.cardElement,
@@ -88,12 +100,9 @@ export default {
         this.error = error.message;
         this.processing = false;
       } else if (paymentIntent.status === 'succeeded') {
-        // Ajouter la commande et notifier l'administrateur
         try {
           await this.$axios.post('/orders', { userId: this.$auth.user.id });
-          // Vider le panier après que la commande ait été ajoutée et la notification envoyée
           await this.emptyCart();
-          // Rediriger vers la page de succès de la commande
           this.$router.push('/order-success');
         } catch (error) {
           console.error('Failed to add order and notify admin:', error);
@@ -192,3 +201,5 @@ export default {
   }
 }
 </style>
+
+

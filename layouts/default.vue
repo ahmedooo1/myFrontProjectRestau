@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div  class="bg-gray-800 ">
     <Header />
 
           <Nuxt  class=" min-h-screen"/>

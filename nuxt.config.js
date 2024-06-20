@@ -22,10 +22,13 @@ export default {
   // Global CSS
   css: [
     '~/assets/css/tailwind.css',
+    'vue-toastification/dist/index.css'
+
   ],
 
   // Plugins to run before rendering page
   plugins: [
+    '~/plugins/toastification.js',
   ],
 
   // Auto import components
@@ -90,7 +93,7 @@ export default {
       plugins: [
         '@babel/plugin-proposal-optional-chaining',
         '@babel/plugin-proposal-class-properties'
-      ]
+            ]
     },
     extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
@@ -140,6 +143,11 @@ export default {
           name: 'reset-password',
           path: '/reset-password/:token',
           component: resolve(__dirname, 'pages/reset-password/_token.vue')
+        },
+        {
+          name: 'contact',
+          path: '/contact',
+          component: resolve(__dirname, 'pages/contact.vue')
         }
       );
     }

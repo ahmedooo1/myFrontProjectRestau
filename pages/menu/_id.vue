@@ -11,22 +11,33 @@
         </button>
       </div>
     </div>
+    <Comments :menuItemId="menuItem.id" />
   </div>
 </template>
 
 <script>
+import Comments from '~/components/Comments.vue';
+
 export default {
+  components: {
+    Comments
+  },
+  data() {
+    return {
+      menuItem: {},
+    };
+  },
   async asyncData({ params, $axios }) {
     try {
       const response = await $axios.get(`/menu/${params.id}`);
       return {
-        menuItem: response.data
-      }
+        menuItem: response.data,
+      };
     } catch (error) {
       console.error('Failed to load menu item', error);
       return {
-        menuItem: {}
-      }
+        menuItem: {},
+      };
     }
   },
   methods: {
@@ -47,7 +58,7 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>
