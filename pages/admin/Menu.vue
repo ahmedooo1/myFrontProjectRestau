@@ -1,10 +1,10 @@
 <template>
   <div class="container mx-auto p-4">
-    <h1 class="text-3xl font-bold mb-4">Gestion du Menu Admin</h1>
+    <h1 class="text-3xl font-bold mb-4 text-white">Gestion du Menu Admin</h1>
     <button @click="showAddModal = true" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">Ajouter un Élément de Menu</button>
     <div v-if="menuItems.length === 0">Aucun élément de menu disponible.</div>
     <div v-for="item in menuItems" :key="item.id" class="bg-white shadow-md rounded-lg p-4 mb-4">
-      <div class="flex justify-between items-center">
+      <div class="flex justify-between items-center sm:flex-row flex-col">
         <div>
           <img :src="getImageUrl(item.image_url)" alt="Image de l'élément de menu" class="w-32 h-32 object-cover rounded">
         </div>
@@ -14,7 +14,7 @@
           <p class="text-lg font-bold">{{ item.price }} €</p>
           <p class="text-md">{{ item.category.title }}</p>
         </div>
-        <div>
+        <div class="w-64 flex items-center justify-center">
           <button @click="editItem(item)" class="bg-yellow-500 text-white px-4 py-2 rounded mr-2">Modifier</button>
           <button @click="deleteItem(item.id)" class="bg-red-500 text-white px-4 py-2 rounded">Supprimer</button>
         </div>
@@ -80,26 +80,36 @@ export default {
     }
   },
   async mounted() {
-    await this.fetchMenuItems()
-    await this.fetchCategories()
+    await this.fetchMenuItems();
+    await this.fetchCategories();
   },
   methods: {
     async fetchMenuItems() {
-      const response = await this.$axios.get('/menu')
-      this.menuItems = response.data
+      try {
+        const response = await this.$axios.get('/menu');
+        this.menuItems = response.data.map(item => {
+          // Flatten the response to remove the extra layer
+          return {
+            ...item[0],
+            commentCount: item.commentCount
+          };
+        });
+      } catch (error) {
+        console.error('Failed to fetch menu items', error);
+      }
     },
     async fetchCategories() {
       try {
-        const response = await this.$axios.get('/categories')
-        this.categories = response.data
+        const response = await this.$axios.get('/categories');
+        this.categories = response.data;
       } catch (error) {
-        console.error('Failed to fetch categories', error)
+        console.error('Failed to fetch categories', error);
       }
     },
     async createMenuItem() {
       if (!this.selectedFile) {
-        this.error = 'Veuillez sélectionner une image.'
-        return
+        this.error = 'Veuillez sélectionner une image.';
+        return;
       }
 
       const formData = {
@@ -108,14 +118,14 @@ export default {
         price: this.currentItem.price,
         image_url: '',
         category_id: this.currentItem.category_id
-      }
+      };
 
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.onloadend = () => {
-        formData.image_url = reader.result
-        this.submitFormData(formData)
-      }
-      reader.readAsDataURL(this.selectedFile)
+        formData.image_url = reader.result;
+        this.submitFormData(formData);
+      };
+      reader.readAsDataURL(this.selectedFile);
     },
     async submitFormData(formData) {
       try {
@@ -123,17 +133,17 @@ export default {
           headers: {
             'Content-Type': 'application/json'
           }
-        })
-        this.closeModal()
-        await this.fetchMenuItems()
+        });
+        this.closeModal();
+        await this.fetchMenuItems();
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     },
     async updateMenuItem() {
       if (!this.selectedFile && !this.currentItem.image_url) {
-        this.error = 'Veuillez sélectionner une image.'
-        return
+        this.error = 'Veuillez sélectionner une image.';
+        return;
       }
 
       const formData = {
@@ -142,17 +152,17 @@ export default {
         price: this.currentItem.price,
         image_url: this.currentItem.image_url, // Conserver l'URL de l'image existante
         category_id: this.currentItem.category_id
-      }
+      };
 
       if (this.selectedFile) {
-        const reader = new FileReader()
+        const reader = new FileReader();
         reader.onloadend = () => {
-          formData.image_url = reader.result
-          this.submitUpdateFormData(formData)
-        }
-        reader.readAsDataURL(this.selectedFile)
+          formData.image_url = reader.result;
+          this.submitUpdateFormData(formData);
+        };
+        reader.readAsDataURL(this.selectedFile);
       } else {
-        this.submitUpdateFormData(formData)
+        this.submitUpdateFormData(formData);
       }
     },
     async submitUpdateFormData(formData) {
@@ -161,25 +171,29 @@ export default {
           headers: {
             'Content-Type': 'application/json'
           }
-        })
-        this.closeModal()
-        await this.fetchMenuItems()
+        });
+        this.closeModal();
+        await this.fetchMenuItems();
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     },
     async deleteItem(id) {
-      await this.$axios.delete(`/menu/${id}`)
-      await this.fetchMenuItems()
+      try {
+        await this.$axios.delete(`/menu/${id}`);
+        await this.fetchMenuItems();
+      } catch (error) {
+        console.error('Failed to delete item', error);
+      }
     },
     editItem(item) {
-      this.currentItem = { ...item, category_id: item.category.id }
-      this.showEditModal = true
-      this.error = '' // Réinitialiser le message d'erreur
+      this.currentItem = { ...item, category_id: item.category.id };
+      this.showEditModal = true;
+      this.error = ''; // Réinitialiser le message d'erreur
     },
     closeModal() {
-      this.showAddModal = false
-      this.showEditModal = false
+      this.showAddModal = false;
+      this.showEditModal = false;
       this.currentItem = {
         id: null,
         name: '',
@@ -187,15 +201,15 @@ export default {
         price: '',
         image_url: '',
         category_id: null
-      }
-      this.selectedFile = null
-      this.error = '' // Réinitialiser le message d'erreur
+      };
+      this.selectedFile = null;
+      this.error = ''; // Réinitialiser le message d'erreur
     },
     onFileChange(event) {
-      this.selectedFile = event.target.files[0]
+      this.selectedFile = event.target.files[0];
     },
     getImageUrl(imagePath) {
-      return `http://127.0.0.1:8000${imagePath}`
+      return `http://api.aa-world.store${imagePath}`;
     }
   }
 }

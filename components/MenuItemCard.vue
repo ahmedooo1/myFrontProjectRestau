@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     getImageUrl(imagePath) {
-      return `http://127.0.0.1:8000${imagePath}`;
+      return `http://api.aa-world.store${imagePath}`;
     },
     async addToCart(item) {
       try {

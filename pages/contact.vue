@@ -1,7 +1,7 @@
 <template>
   <div class="contact-page container mx-auto p-4">
-    <h1 class="text-4xl font-bold mb-6 text-center">Contactez-nous</h1>
-    <form @submit.prevent="submitForm" class="max-w-lg mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <h1 class="text-4xl font-bold mb-6 text-center text-white">Contactez-nous</h1>
+    <form @submit.prevent="submitForm" class="sm:w-1/2 w-full mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Nom</label>
         <input
@@ -82,7 +82,6 @@ export default {
 
 <style scoped>
 .contact-page {
-  background-color: #f9fafb;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

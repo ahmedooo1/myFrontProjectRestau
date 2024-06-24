@@ -1,8 +1,8 @@
 <template>
   <div class="container mx-auto p-4">
-    <h1 class="text-3xl font-bold mb-4">Gestion du Menu Administrateur</h1>
+    <h1 class="text-3xl font-bold mb-4 text-white">Gestion du Menu Administrateur</h1>
     <button @click="showAddModal = true" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">Ajouter un Élément au Menu</button>
-    <div v-if="menuItems.length === 0">Aucun élément de menu disponible.</div>
+    <div v-if="menuItems.length === 0" class="text-white">Aucun élément de menu disponible.</div>
     <div v-for="item in menuItems" :key="item.id" class="bg-white shadow-md rounded-lg p-4 mb-4">
       <div class="flex justify-between items-center">
         <div>
@@ -13,7 +13,7 @@
           <p>{{ item.description }}</p>
           <p class="text-lg font-bold">{{ item.price }} €</p>
         </div>
-        <div>
+        <div class="w-[200px]">
           <button @click="editItem(item)" class="bg-yellow-500 text-white px-4 py-2 rounded mr-2">Modifier</button>
           <button @click="deleteItem(item.id)" class="bg-red-500 text-white px-4 py-2 rounded">Supprimer</button>
         </div>
@@ -126,7 +126,7 @@ export default {
       this.selectedFile = event.target.files[0]
     },
     getImageUrl(imagePath) {
-      return `http://127.0.0.1:8000${imagePath}`
+      return `http://api.aa-world.store${imagePath}`
     }
   }
 }

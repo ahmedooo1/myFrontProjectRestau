@@ -1,11 +1,11 @@
 <template>
   <div class="p-4 h_full">
-    <h1 class="text-2xl font-bold mb-4">Tableau de Bord Administrateur</h1>
+    <h1 class="text-2xl font-bold mb-4 text-white">Tableau de Bord Administrateur</h1>
     <div v-if="stats" class="mb-8">
       <donut-chart :data="[stats.userCount, stats.orderCount, stats.paidOrdersCount]"></donut-chart>
     </div>
     <div>
-      <h2 class="text-xl font-bold mb-4">Liste des Utilisateurs</h2>
+      <h2 class="text-xl font-bold mb-4 text-white">Liste des Utilisateurs</h2>
       <input v-model="searchQuery" placeholder="Rechercher des utilisateurs..." class="border p-2 mb-4 w-full" />
       <div class="overflow-x-auto">
         <table class="min-w-full bg-white">
@@ -37,9 +37,9 @@
           </tbody>
         </table>
       </div>
-      <div class="mt-4 flex justify-between items-center">
+      <div class="mt-4 flex justify-between items-center ">
         <button @click="prevPage" :disabled="page === 1" class="px-4 py-2 bg-gray-300 rounded">Précédent</button>
-        <span>Page {{ page }} sur {{ totalPages }}</span>
+        <span class="text-white">Page {{ page }} sur {{ totalPages }}</span>
         <button @click="nextPage" :disabled="page >= totalPages" class="px-4 py-2 bg-gray-300 rounded ml-2">Suivant</button>
       </div>
     </div>

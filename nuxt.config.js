@@ -29,6 +29,7 @@ export default {
   // Plugins to run before rendering page
   plugins: [
     '~/plugins/toastification.js',
+
   ],
 
   // Auto import components
@@ -48,7 +49,7 @@ export default {
 
 
   axios: {
-    baseURL: 'http://localhost:8000/api', // Replace with your API base URL
+    baseURL: 'http://api.aa-world.store/api', // Replace with your API base URL
   },
 
   auth: {

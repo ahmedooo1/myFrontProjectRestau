@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto mt-8 p-4 max-w-2xl">
+  <div class="container mx-auto mt-8 p-4 max-w-2xl text-white">
     <h2 class="text-2xl font-bold mb-4">Paiement Réussi</h2>
     <p>Merci pour votre réservation !</p>
     <p>Votre commande est en cours de préparation...</p>

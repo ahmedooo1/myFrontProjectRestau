@@ -34,7 +34,7 @@ export default {
     async forgotPassword() {
       if (!this.validate()) return
       try {
-        const response = await this.$axios.post('/request-reset-password', { email: this.email })
+      await this.$axios.post('/request-reset-password', { email: this.email })
         console.log('Password reset email sent:', response.data)
         this.$emit('close')
       } catch (error) {

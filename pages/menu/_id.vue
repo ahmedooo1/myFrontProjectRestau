@@ -7,7 +7,7 @@
         <p class="mb-4">{{ menuItem.description }}</p>
         <p class="text-lg font-bold mb-4">{{ menuItem.price }} €</p>
         <button v-if="$auth.loggedIn" @click="addToCart(menuItem)" class="bg-green-500 text-white px-4 py-2 rounded">
-          Ajouter au Panier
+          <img width="25" height="25" src="https://img.icons8.com/windows/32/FFFFFF/add-to-shopping-basket.png" alt="add-to-shopping-basket"/>
         </button>
       </div>
     </div>
@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     getImageUrl(imagePath) {
-      return `http://127.0.0.1:8000${imagePath}`;
+      return `http://api.aa-world.store${imagePath}`;
     },
     async addToCart(item) {
       try {

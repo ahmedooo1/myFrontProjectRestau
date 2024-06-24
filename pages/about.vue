@@ -1,31 +1,31 @@
 <template>
   <div>
-    <!-- Hero Section -->
+    <!-- Section Héroïque -->
     <section class="relative bg-center bg-cover h-screen" :style="{ backgroundImage: `url(${heroImage})` }">
       <div class="absolute inset-0 bg-black opacity-60"></div>
       <div class="relative flex items-center justify-center h-full">
         <div class="text-center text-white animate-fade-in">
-          <h1 class="text-5xl font-bold mb-4">About Us</h1>
-          <p class="text-lg mb-6">Discover the story behind THE CHEF</p>
+          <h1 class="text-5xl font-bold mb-4">À Propos de NF-EAT</h1>
+          <p class="text-lg mb-6">Découvrez l'histoire derrière NF-EAT</p>
         </div>
       </div>
     </section>
 
-    <!-- Mission Section -->
+    <!-- Section Mission -->
     <section class="py-16 bg-gray-100">
       <div class="container mx-auto px-6 text-center">
-        <h2 class="text-4xl font-bold mb-8">Our Mission</h2>
-        <p class="text-lg max-w-3xl mx-auto">At THE CHEF, our mission is to provide an exceptional dining experience by offering delicious and innovative dishes crafted from the finest ingredients. We are dedicated to creating a welcoming atmosphere where guests can enjoy great food and make lasting memories.</p>
+        <h2 class="text-4xl font-bold mb-8">Notre Mission</h2>
+        <p class="text-lg max-w-3xl mx-auto">Chez NF-EAT, notre mission est de fournir une expérience culinaire exceptionnelle en proposant des plats délicieux et innovants, élaborés à partir des meilleurs ingrédients. Nous nous engageons à créer une atmosphère accueillante où les clients peuvent savourer de délicieux repas et créer des souvenirs durables.</p>
       </div>
     </section>
 
-    <!-- Team Section -->
+    <!-- Section Équipe -->
     <section class="py-16 bg-white">
       <div class="container mx-auto px-6 text-center">
-        <h2 class="text-4xl font-bold mb-12">Meet Our Team</h2>
+        <h2 class="text-4xl font-bold mb-12">Rencontrez Notre Équipe</h2>
         <div class="flex flex-wrap justify-center gap-8">
           <div v-for="member in team" :key="member.id" class="max-w-xs">
-            <img :src="member.image" alt="Team member" class="w-full h-64 object-cover rounded-t-lg">
+            <img :src="member.image" alt="Membre de l'équipe" class="w-full h-64 object-cover rounded-t-lg">
             <div class="bg-gray-200 p-4 rounded-b-lg">
               <h3 class="text-xl font-semibold mb-2">{{ member.name }}</h3>
               <p class="text-gray-700">{{ member.position }}</p>
@@ -35,38 +35,38 @@
       </div>
     </section>
 
-    <!-- Values Section -->
+    <!-- Section Valeurs -->
     <section class="py-16 bg-gray-100">
       <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold mb-12 text-center">Our Values</h2>
+        <h2 class="text-4xl font-bold mb-12 text-center">Nos Valeurs</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
           <div class="p-8 bg-white rounded-lg shadow-lg">
-            <img src="/path/to/icon1.png" alt="Value icon" class="w-16 h-16 mx-auto mb-4">
-            <h3 class="text-xl font-semibold mb-2">Quality</h3>
-            <p>We are committed to using the highest quality ingredients in all our dishes.</p>
+            <img src="/path/to/icon1.png" alt="Icône de valeur" class="w-16 h-16 mx-auto mb-4">
+            <h3 class="text-xl font-semibold mb-2">Qualité</h3>
+            <p>Nous nous engageons à utiliser les ingrédients de la plus haute qualité dans tous nos plats.</p>
           </div>
           <div class="p-8 bg-white rounded-lg shadow-lg">
-            <img src="/path/to/icon2.png" alt="Value icon" class="w-16 h-16 mx-auto mb-4">
-            <h3 class="text-xl font-semibold mb-2">Creativity</h3>
-            <p>Our chefs are dedicated to creating innovative and delicious dishes.</p>
+            <img src="/path/to/icon2.png" alt="Icône de valeur" class="w-16 h-16 mx-auto mb-4">
+            <h3 class="text-xl font-semibold mb-2">Créativité</h3>
+            <p>Nos chefs sont dédiés à la création de plats innovants et délicieux.</p>
           </div>
           <div class="p-8 bg-white rounded-lg shadow-lg">
-            <img src="/path/to/icon3.png" alt="Value icon" class="w-16 h-16 mx-auto mb-4">
+            <img src="/path/to/icon3.png" alt="Icône de valeur" class="w-16 h-16 mx-auto mb-4">
             <h3 class="text-xl font-semibold mb-2">Service</h3>
-            <p>We strive to provide exceptional service to every guest.</p>
+            <p>Nous nous efforçons de fournir un service exceptionnel à chaque client.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Section Contact -->
     <section class="py-16 bg-white">
       <div class="container mx-auto px-6 text-center">
-        <h2 class="text-4xl font-bold mb-8">Get in Touch</h2>
-        <p class="text-lg max-w-2xl mx-auto mb-8">We'd love to hear from you! Whether you have a question about our menu, need assistance with a reservation, or just want to share your feedback, feel free to reach out.</p>
-        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-          Contact Us
-        </button>
+        <h2 class="text-4xl font-bold mb-8">Prenez Contact</h2>
+        <p class="text-lg max-w-2xl mx-auto mb-8">Nous aimerions avoir de vos nouvelles! Que vous ayez une question sur notre menu, besoin d'aide pour une réservation, ou simplement envie de partager vos commentaires, n'hésitez pas à nous contacter.</p>
+        <router-link to="/contact" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+          Contactez-nous
+        </router-link>
       </div>
     </section>
   </div>
@@ -81,19 +81,19 @@ export default {
         {
           id: 1,
           name: 'John Doe',
-          position: 'Head Chef',
+          position: 'Chef Principal',
           image: '/path/to/team-member1.jpg'
         },
         {
           id: 2,
           name: 'Jane Smith',
-          position: 'Sous Chef',
+          position: 'Sous-Chef',
           image: '/path/to/team-member2.jpg'
         },
         {
           id: 3,
           name: 'Sarah Brown',
-          position: 'Pastry Chef',
+          position: 'Chef Pâtissier',
           image: '/path/to/team-member3.jpg'
         }
       ]

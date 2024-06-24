@@ -3,25 +3,24 @@ import { ref } from 'vue'
 
 const menus = ref([
   {
-    title: 'Resources',
+    title: 'Projet',
     items: [
-      { text: 'SaaS Development', link: 'javascript:void(0)' },
-      { text: 'Our Products', link: 'javascript:void(0)' },
-      { text: 'User Flow', link: 'javascript:void(0)' },
-      { text: 'User Strategy', link: 'javascript:void(0)' }
+      { text: 'Contact', link: 'contact' },
+      { text: 'Accueil', link: '/' },
+      { text: 'About', link: 'about' },
+      { text: 'Mentions Légales', link: 'MentionLegales' }
     ]
   },
   {
-    title: 'Company',
+    title: 'Utilisateurs',
     items: [
-      { text: 'About TailGrids', link: 'javascript:void(0)' },
-      { text: 'Contact & Support', link: 'javascript:void(0)' },
-      { text: 'Success History', link: 'javascript:void(0)' },
-      { text: 'Setting & Privacy', link: 'javascript:void(0)' }
+      { text: 'Menus', link: '@menus.vue' },
+      { text: 'Profile', link: '@profile.vue' },
+      { text: 'Politique de Confidentialité', link: '@politique-confidentialite.vue' }
     ]
   },
   {
-    title: 'Quick Links',
+    title: 'Configuration',
     items: [
       { text: 'Premium Support', link: 'javascript:void(0)' },
       { text: 'Our Services', link: 'javascript:void(0)' },

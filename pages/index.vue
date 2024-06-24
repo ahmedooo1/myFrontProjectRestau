@@ -2,74 +2,73 @@
   <div>
     <!-- Hero Section with Custom Slider -->
     <section class="relative bg-center bg-cover h-screen bg-gray-800 text-white">
+
       <div class="relative inset-0 bg-black opacity-50"></div>
       <div class="absolute inset-0">
         <div v-for="(image, index) in images" :key="index" class="bg-image" :style="{ backgroundImage: `url(${image})` }" :class="{ 'active': index === currentIndex }"></div>
       </div>
       <div class="relative flex items-center justify-center h-full">
         <div class="text-center text-white animate-slide-up">
-          <h1 class="text-5xl font-bold mb-4">Bienvenue chez THE CHEF</h1>
+          <h1 class="text-5xl font-bold mb-4">Bienvenue chez NF-EAT</h1>
           <p class="text-lg mb-6">Découvrez une expérience culinaire unique</p>
-          <button @click="scrollToMenu" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105">Voir le Menu</button>
+          <button @click="scrollToMenu" class="bg-yellow-500 hover:bg-yellow-700 text-white font-semibold py-3 px-6 rounded-full transition duration-300 ease-in-out transform hover:scale-105 flex m-auto">Voir le Menu<img width="30" height="30" src="https://img.icons8.com/wired/64/FFFFFF/list--v1.png" alt="list--v1" class="mx-2"/></button>
         </div>
       </div>
     </section>
 
     <!-- Menu Section -->
     <section ref="menuSection" class="py-16 text-white">
-      <div class="container mx-auto px-6">
+      <div class="container mx-auto px-6 text-center">
         <h2 class="text-4xl font-bold text-center mb-12">Nos Menus</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-left">
           <div v-for="(menu, index) in limitedMenus" :key="index" class="bg-gray-600 rounded-lg shadow-lg overflow-hidden animate-slide-in transition duration-300 ease-in-out transform hover:scale-105">
             <img :src="getImageUrl(menu.image_url)" alt="Menu Image" class="w-full h-48 object-cover">
             <div class="p-4">
               <h3 class="text-xl font-semibold mb-2">{{ menu.name }}</h3>
               <p>{{ menu.description }}</p>
               <p class="text-lg font-bold mt-2">{{ menu.price }} €</p>
-
-
             </div>
           </div>
         </div>
-        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4 transition duration-300 ease-in-out transform hover:scale-105" @click="$router.push('/menus')">Voir plus</button>
+        <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded-full mt-4 transition duration-300 ease-in-out transform hover:scale-105" @click="$router.push('/menus')">Voir plus</button>
       </div>
     </section>
 
     <!-- Presentation Section -->
     <section class="py-16 text-white">
       <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold text-center mb-12">À propos de THE CHEF</h2>
+        <h2 class="text-4xl font-bold text-center mb-12">À propos de NF-EAT</h2>
         <div class="flex flex-col md:flex-row items-center">
           <div class="md:w-1/2 md:pr-8">
             <img src="../assets/images/apropos.png" alt="About Image" class="rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-1/2">
           </div>
           <div class="md:w-1/2 md:pl-8 mt-8 md:mt-0">
             <p class="text-lg mb-4">
-              THE CHEF est un restaurant de renommée offrant une expérience culinaire exceptionnelle. Notre équipe de chefs talentueux utilise les meilleurs ingrédients pour créer des plats délicieux et innovants. Venez découvrir notre menu varié et savourez chaque bouchée.
+              NF-EAT est un restaurant de renommée offrant une expérience culinaire exceptionnelle. Notre équipe de chefs talentueux utilise les meilleurs ingrédients pour créer des plats délicieux et innovants. Venez découvrir notre menu varié et savourez chaque bouchée.
             </p>
-            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4 transition duration-300 ease-in-out transform hover:scale-105" @click="$router.push('/about')">En savoir plus</button>
+            <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded-full mt-4 transition duration-300 ease-in-out transform hover:scale-105" @click="$router.push('/about')">En savoir plus</button>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Services Section -->
-    <section class="py-16  text-white">
+    <section class="py-16 text-white">
       <div class="container mx-auto px-6">
         <h2 class="text-4xl font-bold text-center mb-12">Nos Services</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          <div class="text-center p-8 bg-gray-600  rounded-lg shadow-lg animate-fade-in transition duration-300 ease-in-out transform hover:scale-105">
-            <i class="fas fa-utensils w-16 h-16 mx-auto mb-4 text-green-500"></i>
+          <div class="text-center p-8 bg-gray-600 rounded-lg shadow-lg animate-fade-in transition duration-300 ease-in-out transform hover:scale-105">
+            <i class="fas fa-utensils w-16 h-16 mx-auto mb-4 text-yellow-500"></i>
             <h3 class="text-xl font-semibold mb-2">Service de Traiteur</h3>
             <p>Nous offrons un service de traiteur pour vos événements spéciaux avec des plats délicieux et un service professionnel.</p>
           </div>
-          <div class="text-center p-8 bg-gray-600  rounded-lg shadow-lg animate-fade-in transition duration-300 ease-in-out transform hover:scale-105">
-            <i class="fas fa-truck w-16 h-16 mx-auto mb-4 text-green-500"></i>
+          <div class="text-center p-8 bg-gray-600 rounded-lg shadow-lg animate-fade-in transition duration-300 ease-in-out transform hover:scale-105">
+            <i class="fas fa-truck w-16 h-16 mx-auto mb-4 text-yellow-500"></i>
             <h3 class="text-xl font-semibold mb-2">Livraison à Domicile</h3>
             <p>Profitez de nos plats savoureux dans le confort de votre maison avec notre service de livraison rapide et fiable.</p>
           </div>
-          <div class="text-center p-8 bg-gray-600  rounded-lg shadow-lg animate-fade-in transition duration-300 ease-in-out transform hover:scale-105">
-            <i class="fas fa-concierge-bell w-16 h-16 mx-auto mb-4 text-green-500"></i>
+          <div class="text-center p-8 bg-gray-600 rounded-lg shadow-lg animate-fade-in transition duration-300 ease-in-out transform hover:scale-105">
+            <i class="fas fa-concierge-bell w-16 h-16 mx-auto mb-4 text-yellow-500"></i>
             <h3 class="text-xl font-semibold mb-2">Réservations</h3>
             <p>Réservez une table chez THE CHEF pour une expérience culinaire inoubliable dans un cadre élégant et confortable.</p>
           </div>
@@ -80,6 +79,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -96,14 +96,20 @@ export default {
     async fetchMenus() {
       try {
         const response = await this.$axios.get('/menu');
-        this.menus = response.data;
+        this.menus = response.data.map(item => {
+          // Flatten the response to remove the extra layer
+          return {
+            ...item[0],
+            commentCount: item.commentCount
+          };
+        });
         this.images = this.menus.map(menu => this.getImageUrl(menu.image_url));
       } catch (error) {
         console.error('Failed to load menus', error);
       }
     },
     getImageUrl(imagePath) {
-      return `http://127.0.0.1:8000${imagePath}`;
+      return `http://api.aa-world.store${imagePath}`;
     },
     startSlider() {
       setInterval(() => {
