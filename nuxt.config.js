@@ -4,18 +4,19 @@ export default {
 
   // Global page headers
   head: {
-    title: 'myFinalProject',
+    titleTemplate: '%s - NF-EAT',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { hid: 'description', name: 'description', content: 'Découvrez une expérience culinaire unique chez NF-EAT' },
+      { name: 'format-detection', content: 'telephone=no' },
+      { name: 'robots', content: 'index, follow' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/png', href: '/assets/images/NF-EAT transparent.png' }
     ]
   },
 
@@ -23,13 +24,11 @@ export default {
   css: [
     '~/assets/css/tailwind.css',
     'vue-toastification/dist/index.css'
-
   ],
 
   // Plugins to run before rendering page
   plugins: [
     '~/plugins/toastification.js',
-
   ],
 
   // Auto import components
@@ -44,7 +43,6 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     '@nuxtjs/tailwindcss',
-
   ],
 
 

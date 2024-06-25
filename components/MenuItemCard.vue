@@ -17,7 +17,7 @@
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
       <div v-for="item in menuItems" :key="item.id" class="bg-white rounded-lg shadow-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer" @click="goToDetails(item.id)">
-        <img :src="getImageUrl(item.image_url)" alt="Image de l'article du menu" class="w-full h-48 object-cover rounded-t-lg">
+        <img :src="getImageUrl(item.image_url)" :alt="item.name" class="w-full h-48 object-cover rounded-t-lg">
         <div class="p-4 relative">
           <h3 class="text-xl font-semibold mb-2">{{ item.name }}</h3>
           <p v-if="item.description">{{ truncateDescription(item.description) }} <span class="underline text-blue-500 cursor-pointer" @click.stop="goToDetails(item.id)">Voir plus</span></p>

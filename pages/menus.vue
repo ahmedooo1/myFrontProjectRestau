@@ -7,12 +7,20 @@
 <script>
 import MenuItemCard from '../components/MenuItemCard'
 export default {
-  components : {
+  components: {
     MenuItemCard
+  },
+  head() {
+    return {
+      title: 'Menus',
+      meta: [
+        { hid: 'description', name: 'description', content: 'Découvrez tous les articles de notre menu chez NF-EAT.' }
+      ]
+    }
   }
 }
 </script>
 
 <style scoped>
-/* Ajoutez vos styles ici */
+/* Styles... */
 </style>
