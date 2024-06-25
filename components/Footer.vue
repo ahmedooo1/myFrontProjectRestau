@@ -38,19 +38,11 @@ const menus = ref([
         <div class="w-full px-4 sm:w-2/3 lg:w-3/12">
           <div class="w-full mb-10">
             <a href="javascript:void(0)" class="mb-6 inline-block max-w-[160px]">
-              <img
-                src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo.svg"
-                alt="logo"
-                class="max-w-full dark:hidden"
-              />
-              <img
-                src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
-                alt="logo"
-                class="max-w-full hidden dark:block"
-              />
+              <img src="../assets/images/NF-EAT transparent.png" alt="NF-EAT Logo" class="w-28">
+
             </a>
             <p class="text-base text-body-color dark:text-dark-6 mb-7">
-              Sed ut perspiciatis undmnis is iste natus error sit amet voluptatem totam rem aperiam.
+              Découvrez une expérience culinaire unique chez NF-EAT, où chaque plat est une œuvre d'art.
             </p>
             <p class="flex items-center text-sm font-medium text-dark dark:text-white">
               <span class="mr-3 text-primary">
@@ -82,7 +74,7 @@ const menus = ref([
                   </defs>
                 </svg>
               </span>
-              <span>+012 (345) 678 99</span>
+              <span>+33 12 34 56 78 90</span>
             </p>
           </div>
         </div>

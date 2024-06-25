@@ -1,5 +1,7 @@
 <template>
-  <div class="container mx-auto mt-8 p-4 max-w-md bg-white shadow-lg rounded-lg">
+  <div>
+
+     <div class="container mx-auto mt-8 p-4 max-w-md bg-white shadow-lg rounded-lg">
     <h2 class="text-2xl font-bold mb-6 text-center">Réinitialiser le mot de passe</h2>
     <form @submit.prevent="resetPassword">
       <div class="mb-4">
@@ -33,6 +35,9 @@
       <p v-if="message" :class="messageType" class="mt-4 p-2 text-center rounded">{{ message }}</p>
     </transition>
   </div>
+  </div>
+
+
 </template>
 
 <script>

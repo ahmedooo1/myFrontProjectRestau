@@ -5,7 +5,7 @@
     <div v-if="menuItems.length === 0">Aucun élément de menu disponible.</div>
     <div v-for="item in menuItems" :key="item.id" class="bg-white shadow-md rounded-lg p-4 mb-4">
       <div class="flex justify-between items-center sm:flex-row flex-col">
-        <div>
+        <div class="">
           <img :src="getImageUrl(item.image_url)" alt="Image de l'élément de menu" class="w-32 h-32 object-cover rounded">
         </div>
         <div class="flex-grow ml-4">

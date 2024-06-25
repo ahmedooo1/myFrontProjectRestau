@@ -136,11 +136,6 @@ export default {
           component: resolve(__dirname, 'pages/politique-confidentialite.vue')
         },
         {
-          name: 'request-reset-password',
-          path: '/request-reset-password',
-          component: resolve(__dirname, 'pages/request-reset-password.vue')
-        },
-        {
           name: 'reset-password',
           path: '/reset-password/:token',
           component: resolve(__dirname, 'pages/reset-password/_token.vue')

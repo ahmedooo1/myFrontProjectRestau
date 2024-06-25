@@ -1,6 +1,6 @@
 <template>
   <header class="bg-gray-800 p-4 text-white flex justify-between items-center">
-    <h1 class="text-2xl font-bold">MyApp</h1>
+    <img src="../assets/images/NF-EAT transparent.png" alt="NF-EAT Logo" class="w-20">
     <button @click="toggleMenu" class="md:hidden">
       <img width="30" height="30" src="https://img.icons8.com/ios-filled/50/FFFFFF/menu--v1.png" alt="menu" />
     </button>
@@ -80,9 +80,20 @@ export default {
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen
     },
+    closeMenu() {
+      this.isMenuOpen = false
+    },
     async logout() {
       await this.$auth.logout()
+      this.closeMenu() // Close the menu on logout
       this.$router.push('/')
+    }
+  },
+  watch: {
+    '$auth.loggedIn'(newVal) {
+      if (newVal) {
+        this.closeMenu() // Close the menu on login
+      }
     }
   }
 }
