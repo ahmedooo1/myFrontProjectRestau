@@ -16,20 +16,13 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18.20.3' # Specify the Node.js version you need
+        node-version: '18' # Specify the Node.js version you need
 
     - name: Install Dependencies
       run: npm install
 
     - name: Build
       run: npm run build
-
-    - name: Debug Secrets
-      run: |
-        echo "SERVER_IP: ${{ secrets.SERVER_IP }}"
-        echo "SERVER_USER: ${{ secrets.SERVER_USER }}"
-        echo "SSH_KEY: ${{ secrets.SSH_KEY }}"
-        echo "DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}"
 
     - name: Deploy to Server
       uses: appleboy/ssh-action@master
@@ -38,7 +31,5 @@ jobs:
         username: ${{ secrets.SERVER_USER }} # Server SSH username
         key: ${{ secrets.SSH_KEY }} # SSH private key, stored as a secret
         script: |
-          cd /var/www/nuxt-app
-          git pull origin main
-          npm install --production
-          pm2 restart all
+          cd ${{ secrets.DEPLOY_PATH }}
+          pm2 reload ecosystem.config.js # Assuming you have an ecosystem file for PM2
