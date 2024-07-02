@@ -16,7 +16,7 @@ const menus = ref([
     items: [
       { text: 'Menus', link: '/menus' },
       { text: 'Profile', link: '/profile' },
-      { text: 'Politique de Confidentialité', link: '/politique-confidentialite.vue' }
+      { text: 'Politique de Confidentialité', link: '/politique-confidentialite' }
     ]
   }
 ])
@@ -25,12 +25,12 @@ const menus = ref([
 <template>
   <footer class="bg-gray-800 text-white dark:bg-dark pt-20 pb-10 lg:pt-[120px] lg:pb-20">
     <div class="container mx-auto">
-      <div class="flex flex-wrap">
+      <div class="flex flex-wrap justify-center">
         <!-- Logo and Description -->
-        <div class="w-full px-4 sm:w-2/3 lg:w-3/12">
+        <div class="w-full px-4 sm:w-2/3 lg:w-3/12 text-center">
           <div class="w-full mb-10">
             <a href="javascript:void(0)" class="mb-6 inline-block max-w-[160px]">
-              <img src="../assets/images/NF-EAT transparent.png" alt="NF-EAT Logo" class="w-28">
+              <img src="../assets/images/NF-EAT-transparent.png" alt="NF-EAT Logo" class="w-28">
             </a>
             <p class="text-base text-body-color dark:text-dark-6 mb-7">
               Découvrez une expérience culinaire unique chez NF-EAT, où chaque plat est une œuvre d'art.

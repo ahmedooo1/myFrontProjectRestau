@@ -14,7 +14,8 @@ head() {
   return {
     title: 'Accueil',
     meta: [
-      { hid: 'description', name: 'description', content: 'Bienvenue chez NF-EAT, découvrez notre menu et nos services.' }
+      { hid: 'description', name: 'description', content: 'Bienvenue chez NF-EAT, découvrez notre menu et nos services.' },
+      { name: 'keywords', content: 'restaurant, NF-EAT, accueil, menu, services, Rouen, restau, Elbeuf, 76, kebab, syrien, syrie, français, libanais, turc, helal' }
     ]
   }
 }

@@ -95,6 +95,15 @@ export default {
         }
       ]
     };
+  },
+  head() {
+    return {
+      title: 'À Propos',
+      meta: [
+        { hid: 'description', name: 'description', content: 'Découvrez l\'histoire derrière NF-EAT.' },
+        { name: 'keywords', content: 'restaurant, NF-EAT, à propos, histoire' }
+      ]
+    }
   }
 }
 </script>

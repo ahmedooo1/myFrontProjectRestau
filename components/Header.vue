@@ -1,6 +1,9 @@
 <template>
   <header class="bg-gray-800 p-4 text-white flex justify-between items-center">
-    <img src="../assets/images/NF-EAT transparent.png" alt="NF-EAT Logo" class="w-20">
+    <router-link to="/">
+    <img src="../assets/images/NF-EAT-transparent.png" alt="NF-EAT Logo" class="w-20">
+  </router-link>
+
     <button @click="toggleMenu" class="md:hidden">
       <img width="30" height="30" src="https://img.icons8.com/ios-filled/50/FFFFFF/menu--v1.png" alt="menu" />
     </button>

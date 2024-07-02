@@ -93,6 +93,15 @@ export default {
       const maxLength = 100; // Adjust the length as needed
       return description.length > maxLength ? description.substring(0, maxLength) + '...' : description;
     }
+  },
+  head() {
+    return {
+      title: 'Articles du Menu',
+      meta: [
+        { hid: 'description', name: 'description', content: 'Découvrez les articles de notre menu chez NF-EAT.' },
+        { name: 'keywords', content: 'restaurant, NF-EAT, menu, articles, food' }
+      ]
+    }
   }
 }
 </script>

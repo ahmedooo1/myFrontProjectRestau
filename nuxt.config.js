@@ -4,7 +4,7 @@ export default {
 
   // Global page headers
   head: {
-    titleTemplate: '%s - NF-EAT',
+    titleTemplate: '%s  NF-EAT',
     htmlAttrs: {
       lang: 'en'
     },
@@ -13,10 +13,13 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Découvrez une expérience culinaire unique chez NF-EAT' },
       { name: 'format-detection', content: 'telephone=no' },
-      { name: 'robots', content: 'index, follow' }
+      { name: 'robots', content: 'index, follow' },
+      { name: 'keywords', content: 'restaurant, NF-EAT, menu, food, culinary experience, Need For Eat, need for eat, elbeuf, rouen, 76, syrie, restau, syrien, libanais, kurde, oriental, français, eu, nf eat, nfeat' },
+      { name: 'author', content: 'NF-EAT' }
     ],
     link: [
-      { rel: 'icon', type: 'image/png', href: '/assets/images/NF-EAT transparent.png' }
+      { rel: 'icon', type: 'image/png', href: '/assets/images/NF-EAT-transparent.png' },
+      { rel: 'canonical', href: 'https://app.aa-world.store' }
     ]
   },
 
@@ -29,6 +32,8 @@ export default {
   // Plugins to run before rendering page
   plugins: [
     '~/plugins/toastification.js',
+    '~/plugins/socket.js'
+
   ],
 
   // Auto import components
@@ -43,11 +48,25 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/sitemap',
   ],
 
+  sitemap: {
+    hostname: 'https://www.app.aa-world.store',
+    gzip: true,
+    routes: [
+      '/admin/menu',
+      '/payment/:amount',
+      '/menu/:id',
+      '/mentions-legales',
+      '/politique-confidentialite',
+      '/reset-password/:token',
+      '/contact'
+    ]
+  },
 
   axios: {
-    baseURL: 'http://api.aa-world.store/api', // Replace with your API base URL
+    baseURL: 'https://api.aa-world.store/api',
   },
 
   auth: {
@@ -70,6 +89,12 @@ export default {
         },
       },
     },
+    redirect: {
+      login: '/',
+      logout: '/',
+      callback: '/',
+      home: '/'
+    }
   },
 
   // Build Configuration
@@ -108,21 +133,23 @@ export default {
   // Extend routes
   router: {
     extendRoutes(routes, resolve) {
-      routes.push({
-        name: 'admin-menu',
-        path: '/admin/menu',
-        component: resolve(__dirname, 'pages/admin/Menu.vue')
-      },
-      {
-        name: 'payment-amount',
-        path: '/payment/:amount',
-        component: resolve(__dirname, 'pages/payment/[amount].vue')
-      },
-      {
-        name: 'menu-details',
-        path: '/menu/:id',
-        component: resolve(__dirname, 'pages/menu/_id.vue')
-      },
+      routes.push(
+        {
+          name: 'admin-menu',
+          path: '/admin/menu',
+          component: resolve(__dirname, 'pages/admin/Menu.vue'),
+          meta: { requiresAuth: true }
+        },
+        {
+          name: 'payment-amount',
+          path: '/payment/:amount',
+          component: resolve(__dirname, 'pages/payment/[amount].vue')
+        },
+        {
+          name: 'menu-details',
+          path: '/menu/:id',
+          component: resolve(__dirname, 'pages/menu/_id.vue')
+        },
         {
           name: 'mentions-legales',
           path: '/mentions-legales',
@@ -142,6 +169,12 @@ export default {
           name: 'contact',
           path: '/contact',
           component: resolve(__dirname, 'pages/contact.vue')
+        },
+        {
+          name: 'profile',
+          path: '/profile',
+          component: resolve(__dirname, 'pages/profile.vue'),
+          meta: { requiresAuth: true }
         }
       );
     }

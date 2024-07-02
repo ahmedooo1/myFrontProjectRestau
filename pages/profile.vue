@@ -8,7 +8,8 @@ import Profile from '../components/Profile'
 export default {
   components: {
     Profile
-  }
+  },
+  middleware: 'auth'
 }
 </script>
 

@@ -2,13 +2,14 @@
   <div>
     <!-- Hero Section with Custom Slider -->
     <section class="relative bg-center bg-cover h-screen bg-gray-800 text-white">
+
       <div class="relative inset-0 bg-black opacity-50"></div>
       <div class="absolute inset-0">
         <div v-for="(image, index) in images" :key="index" class="bg-image" :style="{ backgroundImage: `url(${image})` }" :class="{ 'active': index === currentIndex }"></div>
       </div>
       <div class="relative flex items-center justify-center h-full">
         <div class="text-center text-white animate-slide-up">
-          <img src="../assets/images/NF-EAT transparent.png" alt="NF-EAT Logo" class="w-56 mx-auto">
+          <img src="../assets/images/NF-EAT-transparent.png" alt="NF-EAT Logo" class="w-56 mx-auto">
           <h1 class="text-5xl font-bold mb-4">Bienvenue chez NF-EAT</h1>
           <p class="text-lg mb-6">Découvrez une expérience culinaire unique</p>
           <button @click="scrollToMenu" class="bg-yellow-500 hover:bg-yellow-700 text-white font-semibold py-3 px-6 rounded-full transition duration-300 ease-in-out transform hover:scale-105 flex m-auto">Voir le Menu<img width="30" height="30" src="https://img.icons8.com/wired/64/FFFFFF/list--v1.png" alt="list--v1" class="mx-2"/></button>
