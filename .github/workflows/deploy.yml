@@ -3,7 +3,7 @@ name: Deploy Nuxt Application
 on:
   push:
     branches:
-      - main # Set this to the branch you want to deploy from
+      - main
 
 jobs:
   deploy:
@@ -16,7 +16,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18' # Specify the Node.js version you need
+        node-version: '18'
 
     - name: Install Dependencies
       run: npm install
@@ -27,9 +27,12 @@ jobs:
     - name: Deploy to Server
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.SERVER_IP }} # The IP address or hostname of your server
-        username: ${{ secrets.SERVER_USER }} # Server SSH username
-        key: ${{ secrets.SSH_KEY }} # SSH private key, stored as a secret
+        host: ${{ secrets.SERVER_IP }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_KEY }}
         script: |
-          cd ${{ secrets.DEPLOY_PATH }}
+          cd /var/www/nuxt-app
+          git pull origin main
+          npm install --production
+          npm run build
           pm2 restart all
