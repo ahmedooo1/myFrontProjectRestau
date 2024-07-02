@@ -14,7 +14,7 @@ export default {
       { hid: 'description', name: 'description', content: 'Découvrez une expérience culinaire unique chez NF-EAT' },
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'robots', content: 'index, follow' },
-      { name: 'keywords', content: 'restaurant, NF-EAT, menu, food, culinary experience' },
+      { name: 'keywords', content: 'restaurant, NF-EAT, menu, food, culinary experience, Need For Eat, need for eat, elbeuf, rouen, 76, syrie, restau, syrien, libanais, kurde, oriental, français, eu, nf eat, nfeat' },
       { name: 'author', content: 'NF-EAT' }
     ],
     link: [
@@ -48,7 +48,6 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/sitemap',
   ],
 
   sitemap: {
@@ -65,8 +64,9 @@ export default {
     ]
   },
 
+
   axios: {
-    baseURL: 'https://api.aa-world.store/api', // Replace with your API base URL
+    baseURL: 'https://api.aa-world.store/api',
   },
 
   auth: {

@@ -15,7 +15,7 @@ export default {
       title: 'Menus',
       meta: [
         { hid: 'description', name: 'description', content: 'Découvrez tous les articles de notre menu chez NF-EAT.' },
-        { name: 'keywords', content: 'restaurant, NF-EAT, menus, food' }
+        { name: 'keywords', content: 'restaurant, NF-EAT, menus, food, Rouen, 76, ahmedooo, aa, ahmad, menu, shwerma, tacos, elbeuf' }
       ]
     }
   }
