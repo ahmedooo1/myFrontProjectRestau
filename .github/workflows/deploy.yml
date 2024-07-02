@@ -39,4 +39,4 @@ jobs:
         key: ${{ secrets.SSH_KEY }} # SSH private key, stored as a secret
         script: |
           cd ${{ secrets.DEPLOY_PATH }}
-          pm2 reload ecosystem.config.js # Assuming you have an ecosystem file for PM2
+          pm2 restart all
