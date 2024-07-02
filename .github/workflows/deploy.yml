@@ -1,1 +1,35 @@
-deploy conf
+name: Deploy Nuxt Application
+
+on:
+  push:
+    branches:
+      - main  # Set this to the branch you want to deploy from
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'  # Specify the Node.js version you need
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build
+
+    - name: Deploy to Server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}  # The IP address or hostname of your server
+        username: ${{ secrets.USERNAME }}  # Server SSH username
+        key: ${{ secrets.SSH_KEY }}  # SSH private key, stored as a secret
+        script: |
+          cd /path/to/your/app
+          pm2 reload ecosystem.config.js  # Assuming you have an ecosystem file for PM2
