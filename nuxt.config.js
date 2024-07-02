@@ -47,23 +47,10 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
-    '@nuxtjs/tailwindcss',
+    '@nuxtjs/tailwindcss'
   ],
 
-  sitemap: {
-    hostname: 'https://www.app.aa-world.store',
-    gzip: true,
-    routes: [
-      '/admin/menu',
-      '/payment/:amount',
-      '/menu/:id',
-      '/mentions-legales',
-      '/politique-confidentialite',
-      '/reset-password/:token',
-      '/contact'
-    ]
-  },
-
+ 
 
   axios: {
     baseURL: 'https://api.aa-world.store/api',
