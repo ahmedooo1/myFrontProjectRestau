@@ -38,5 +38,7 @@ jobs:
         username: ${{ secrets.SERVER_USER }} # Server SSH username
         key: ${{ secrets.SSH_KEY }} # SSH private key, stored as a secret
         script: |
-          cd ${{ secrets.DEPLOY_PATH }}
+          cd /var/www/nuxt-app
+          git pull origin main
+          npm install --production
           pm2 restart all
