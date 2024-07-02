@@ -23,7 +23,7 @@ export default {
     ]
   },
 
-  // Global CSS
+  // Global CSS 
   css: [
     '~/assets/css/tailwind.css',
     'vue-toastification/dist/index.css'
