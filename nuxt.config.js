@@ -47,10 +47,10 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
-    '@nuxtjs/tailwindcss',
+    '@nuxtjs/tailwindcss'
   ],
 
-
+ 
 
   axios: {
     baseURL: 'https://api.aa-world.store/api',
