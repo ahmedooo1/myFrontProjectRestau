@@ -27,9 +27,9 @@ jobs:
     - name: Deploy to Server
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.HOST }}  # The IP address or hostname of your server
-        username: ${{ secrets.USERNAME }}  # Server SSH username
-        key: ${{ secrets.SSH_KEY }}  # SSH private key, stored as a secret
+        host: ${{ secrets.HOST }}  
+        username: ${{ secrets.USERNAME }} 
+        key: ${{ secrets.SSH_KEY }}
         script: |
           cd /var/www/nuxt-app
           pm2 reload ecosystem.config.js  # Assuming you have an ecosystem file for PM2
