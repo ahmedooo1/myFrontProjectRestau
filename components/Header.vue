@@ -1,43 +1,45 @@
 <template>
   <header class="bg-gray-800 p-4 text-white flex justify-between items-center">
-    <img src="../assets/images/NF-EAT transparent.png" alt="NF-EAT Logo" class="w-20">
+<router-link to="/">
+    <img src="../assets/images/NF-EAT-transparent.png" alt="NF-EAT Logo" class="w-20">
+</router-link>
     <button @click="toggleMenu" class="md:hidden">
       <img width="30" height="30" src="https://img.icons8.com/ios-filled/50/FFFFFF/menu--v1.png" alt="menu" />
     </button>
     <nav :class="{'block p-3 rounded-b-3xl': isMenuOpen , 'hidden': !isMenuOpen}" class="w-full md:flex md:items-center md:w-auto md:static absolute top-16 right-0 bg-gray-800 md:bg-transparent z-10 ">
       <ul class="flex flex-col md:flex-row md:space-x-4">
         <li>
-          <router-link to="/" class="flex items-center" title="Accueil">
+          <router-link to="/" class="flex items-center" title="Accueil" @click.native="closeMenu">
             <img width="30" height="30" src="https://img.icons8.com/ios/50/FFFFFF/home--v1.png" alt="home--v1" class="mr-2" />Accueil
           </router-link>
         </li>
         <li v-if="$auth.loggedIn && $auth.user.roles.includes('ROLE_ADMIN')">
-          <router-link to="/admin/dashboard" class="flex items-center" title="Dashboard">
+          <router-link to="/admin/dashboard" class="flex items-center" title="Dashboard" @click.native="closeMenu">
             <img width="30" height="30" src="https://img.icons8.com/ios/50/FFFFFF/control-panel--v2.png" alt="control-panel--v2" class="mr-2"/>Dashboard
           </router-link>
         </li>
         <li v-if="$auth.loggedIn && $auth.user.roles.includes('ROLE_ADMIN')">
-          <router-link to="/admin/menu" class="flex items-center" title="Menu Admin">
+          <router-link to="/admin/menu" class="flex items-center" title="Menu Admin" @click.native="closeMenu">
             <img width="30" height="30" src="https://img.icons8.com/windows/32/FFFFFF/circled-menu.png" alt="circled-menu" class="mr-2"/>Menu Admin
           </router-link>
         </li>
         <li v-if="$auth.loggedIn">
-          <router-link to="/menus" class="flex items-center" title="Menu Admin">
+          <router-link to="/menus" class="flex items-center" title="Menu Admin" @click.native="closeMenu">
             <img width="30" height="30" src="https://img.icons8.com/wired/64/FFFFFF/list--v1.png" alt="list--v1" class="mr-2"/>Menu
           </router-link>
         </li>
         <li v-if="$auth.loggedIn">
-          <router-link to="/profile" class="flex items-center" title="Profil">
+          <router-link to="/profile" class="flex items-center" title="Profil" @click.native="closeMenu">
             <img width="30" height="30" src="https://img.icons8.com/glyph-neue/64/FFFFFF/test-account.png" alt="test-account" class="mr-2"/>Profil
           </router-link>
         </li>
         <li v-if="$auth.loggedIn">
-          <router-link to="/cart" class="flex items-center" title="Panier">
+          <router-link to="/cart" class="flex items-center" title="Panier" @click.native="closeMenu">
             <img width="30" height="30" src="https://img.icons8.com/pastel-glyph/64/FFFFFF/shopping-cart--v2.png" alt="shopping-cart--v2" class="mr-2"/>Panier
           </router-link>
         </li>
         <li v-if="$auth.loggedIn && $auth.user.roles.includes('ROLE_ADMIN')">
-          <router-link to="/admin/notifications" class="flex items-center" title="Notifications">
+          <router-link to="/admin/notifications" class="flex items-center" title="Notifications" @click.native="closeMenu">
             <img width="30" height="30" src="https://img.icons8.com/external-creatype-outline-colourcreatype/64/FFFFFF/external-alarm-essential-ui-v2-creatype-outline-colourcreatype-2.png" alt="external-alarm-essential-ui-v2-creatype-outline-colourcreatype-2" class="mr-2"/>Notifications
           </router-link>
         </li>
@@ -95,13 +97,15 @@ export default {
         this.closeMenu() // Close the menu on login
       }
     }
+  },
+  beforeRouteLeave(to, from, next) {
+    this.closeMenu();
+    next();
   }
 }
 </script>
 
 <style scoped>
-
-
 @media (min-width: 768px) {
   .md\\:flex {
     display: flex !important;

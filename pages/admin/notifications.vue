@@ -59,6 +59,7 @@ export default {
   },
   async mounted() {
     await this.fetchNotifications();
+    this.listenForNotifications();
   },
   methods: {
     async fetchNotifications() {
@@ -85,6 +86,21 @@ export default {
       } finally {
         this.loading = false;
       }
+    },
+    listenForNotifications() {
+      this.$socket.on('new-order', (data) => {
+        const details = this.parseDetails(data.commandNames);
+        const notification = {
+          ...data,
+          commandNames: details.commandNames.join(', '),
+          totalQuantity: details.totalQuantity,
+          totalPrice: details.totalPrice
+        };
+        this.notifications.unshift(notification);
+        if (this.notifications.length > this.limit) {
+          this.notifications.pop();
+        }
+      });
     },
     parseDetails(details) {
       const items = details.split(', ');

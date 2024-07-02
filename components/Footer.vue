@@ -14,32 +14,23 @@ const menus = ref([
   {
     title: 'Utilisateurs',
     items: [
-      { text: 'Menus', link: '@menus.vue' },
-      { text: 'Profile', link: '@profile.vue' },
-      { text: 'Politique de Confidentialité', link: '@politique-confidentialite.vue' }
-    ]
-  },
-  {
-    title: 'Configuration',
-    items: [
-      { text: 'Premium Support', link: 'javascript:void(0)' },
-      { text: 'Our Services', link: 'javascript:void(0)' },
-      { text: 'Know Our Team', link: 'javascript:void(0)' },
-      { text: 'Download App', link: 'javascript:void(0)' }
+      { text: 'Menus', link: '/menus' },
+      { text: 'Profile', link: '/profile' },
+      { text: 'Politique de Confidentialité', link: '/politique-confidentialite' }
     ]
   }
 ])
 </script>
 
 <template>
-  <footer class="  bg-gray-800 text-white dark:bg-dark pt-20 pb-10 lg:pt-[120px] lg:pb-20">
+  <footer class="bg-gray-800 text-white dark:bg-dark pt-20 pb-10 lg:pt-[120px] lg:pb-20">
     <div class="container mx-auto">
-      <div class="flex flex-wrap">
-        <div class="w-full px-4 sm:w-2/3 lg:w-3/12">
+      <div class="flex flex-wrap justify-center">
+        <!-- Logo and Description -->
+        <div class="w-full px-4 sm:w-2/3 lg:w-3/12 text-center">
           <div class="w-full mb-10">
             <a href="javascript:void(0)" class="mb-6 inline-block max-w-[160px]">
-              <img src="../assets/images/NF-EAT transparent.png" alt="NF-EAT Logo" class="w-28">
-
+              <img src="../assets/images/NF-EAT-transparent.png" alt="NF-EAT Logo" class="w-28">
             </a>
             <p class="text-base text-body-color dark:text-dark-6 mb-7">
               Découvrez une expérience culinaire unique chez NF-EAT, où chaque plat est une œuvre d'art.
@@ -79,6 +70,7 @@ const menus = ref([
           </div>
         </div>
 
+        <!-- Menu Sections -->
         <div v-for="menu in menus" :key="menu.title" class="w-full px-4 sm:w-1/2 lg:w-2/12">
           <div class="w-full mb-10">
             <h4 class="text-lg font-semibold text-dark dark:text-white mb-9">{{ menu.title }}</h4>
@@ -95,6 +87,7 @@ const menus = ref([
           </div>
         </div>
 
+        <!-- Social Media Links -->
         <div class="w-full px-4 sm:w-1/2 lg:w-3/12">
           <div class="w-full mb-10">
             <h4 class="text-lg font-semibold text-dark dark:text-white mb-9">Follow Us On</h4>
@@ -140,14 +133,10 @@ const menus = ref([
                 </svg>
               </a>
             </div>
-            <p class="text-base text-body-color dark:text-dark-6">&copy; 2025 TailGrids</p>
+            <p class="text-base text-body-color dark:text-dark-6">&copy; 2024 NF-EAT</p>
           </div>
         </div>
       </div>
     </div>
-    <div>
-
-    </div>
   </footer>
-  <!-- ====== Footer Section End -->
 </template>

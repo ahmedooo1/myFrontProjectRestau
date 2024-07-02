@@ -32,9 +32,9 @@
           rows="5"
         ></textarea>
       </div>
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-center">
         <button
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
           type="submit"
         >
           Envoyer le message
