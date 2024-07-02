@@ -1,6 +1,6 @@
 <template>
   <header class="bg-gray-800 p-4 text-white flex justify-between items-center">
-    <router-link to="/" @click.native="closeMenu">
+    <router-link to="/" @click.native="closeMenu" >
       <img src="../assets/images/NF-EAT-transparent.png" alt="NF-EAT Logo" class="w-20 logo">
     </router-link>
     <button @click="toggleMenu" class="md:hidden">
