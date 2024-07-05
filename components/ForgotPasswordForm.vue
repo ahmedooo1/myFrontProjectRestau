@@ -2,7 +2,7 @@
   <div>
     <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Mot de passe oublié</h3>
     <div>
-      <input v-model="email" type="email" placeholder="E-mail" class="border p-2 w-full mb-2"/>
+      <input v-model="email" type="email" placeholder="E-mail" class="border p-2 w-full mb-2 text-gray-800"/>
       <span v-if="errors.email" class="text-red-500 text-sm">{{ errors.email }}</span>
       <button @click="forgotPassword" class="bg-blue-500 text-white p-2 w-full">Réinitialiser le mot de passe</button>
       <p class="mt-4 text-sm text-gray-500">
