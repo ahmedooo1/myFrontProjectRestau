@@ -23,11 +23,11 @@ export default {
   computed: {
     chartData() {
       return {
-        labels: ['Utilisateurs', 'Commandes', 'Commandes Payées'],
+        labels: ['Utilisateurs', 'Commandes'],
         datasets: [
           {
             label: 'Statistics',
-            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+            backgroundColor: ['#FF6384', '#36A2EB'],
             data: this.data
           }
         ]
