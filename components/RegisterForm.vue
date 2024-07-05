@@ -54,7 +54,7 @@ export default {
         console.log('Payload:', payload)
         const response = await this.$axios.post('/user/register', payload)
         console.log('Registration successful:', response.data)
-        this.$toast.success('Registration successful:')
+        this.$toast.success('L\'inscription est réussi !')
         this.$emit('close')
       } catch (error) {
         console.error('Registration failed:', error.response ? error.response.data : error)
