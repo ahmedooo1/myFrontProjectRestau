@@ -67,8 +67,8 @@ export default {
     filteredUsers() {
       return this.users.filter(user =>
         (user.email ? user.email.toLowerCase().includes(this.searchQuery.toLowerCase()) : false) ||
-        (user.name ? user.name.toLowerCase().includes(this.searchQuery.toLowerCase()) : false) ||
-        (user.roles.join(', ') ? user.roles.join(', ').toLowerCase().includes(this.searchQuery.toLowerCase()) : false)
+        (user.name ? user.name.toLowerCase().includes(this.searchQuery.toLowerCase()) : false)// ||
+      //  (user.roles.join(', ') ? user.roles.join(', ').toLowerCase().includes(this.searchQuery.toLowerCase()) : false)
       )
     },
     totalPages() {
