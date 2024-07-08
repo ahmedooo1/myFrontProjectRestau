@@ -25,7 +25,7 @@
             <img :src="getImageUrl(menu.image_url)" alt="Menu Image" class="w-full h-48 object-cover">
             <div class="p-4">
               <h3 class="text-xl font-semibold mb-2">{{ menu.name }}</h3>
-              <p>{{ menu.description }}</p>
+              <p v-if="menu.description">{{ truncateDescription(menu.description) }} <span class="underline text-blue-500 cursor-pointer" @click.stop="goToDetails(menu.id)">Voir plus</span></p>
               <p class="text-lg font-bold mt-2">{{ menu.price }} €</p>
             </div>
           </div>
@@ -85,7 +85,8 @@ export default {
     return {
       menus: [],
       images: [],
-      currentIndex: 0
+      currentIndex: 0,
+      expandedDescriptions: []
     };
   },
   async mounted() {
@@ -126,6 +127,18 @@ export default {
     addToCart(menu) {
       // Add the menu item to the cart
       // Implement your cart logic here
+    },
+    truncateDescription(description) {
+      if (description.length > 100) {
+        return description.slice(0, 100) + '...';
+      }
+      return description;
+    },
+    showFullDescription(index) {
+      this.$set(this.expandedDescriptions, index, true);
+    },
+    goToDetails(id) {
+      // Implement logic to navigate to details page based on item id
     }
   },
   computed: {
