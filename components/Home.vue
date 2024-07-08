@@ -40,7 +40,7 @@
         <h2 class="text-4xl font-bold text-center mb-12">À propos de NF-EAT</h2>
         <div class="flex flex-col md:flex-row items-center">
           <div class="md:w-1/2 md:pr-8">
-            <img src="../assets/images/apropos.png" alt="About Image" class="rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-1/2">
+            <img src="../assets/images/restauNFE.jpg" alt="About Image" class="rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-full">
           </div>
           <div class="md:w-1/2 md:pl-8 mt-8 md:mt-0">
             <p class="text-lg mb-4">
