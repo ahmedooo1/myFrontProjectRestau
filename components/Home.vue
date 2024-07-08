@@ -25,7 +25,7 @@
             <img :src="getImageUrl(menu.image_url)" alt="Menu Image" class="w-full h-48 object-cover">
             <div class="p-4">
               <h3 class="text-xl font-semibold mb-2">{{ menu.name }}</h3>
-              <p v-if="menu.description">{{ truncateDescription(menu.description) }} <span class="underline text-blue-500 cursor-pointer" @click.stop="goToDetails(menu.id)">Voir plus</span></p>
+              <p v-if="menu.description">{{ truncateDescription(menu.description) }} <span class="underline text-yellow-500 cursor-pointer" @click.stop="goToDetails(menu.id)">Voir plus</span></p>
               <p class="text-lg font-bold mt-2">{{ menu.price }} €</p>
             </div>
           </div>
