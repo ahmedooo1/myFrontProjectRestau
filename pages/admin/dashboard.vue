@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 h_full">
+  <div class="p-4 h_full" v-if="$auth.loggedIn && $auth.user.roles.includes('ROLE_ADMIN')">
     <h1 class="text-2xl font-bold mb-4 text-white">Tableau de Bord Administrateur</h1>
     <div v-if="stats" class="mb-8">
       <donut-chart :data="[stats.userCount, stats.orderCount, stats.paidOrdersCount]"></donut-chart>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto p-4">
+  <div class="container mx-auto p-4" v-if="$auth.loggedIn && $auth.user.roles.includes('ROLE_ADMIN')">
     <h2 class="text-3xl font-bold mb-6 text-gray-800">Notifications de Commandes</h2>
     <div v-if="loading" class="text-center text-gray-600">Chargement...</div>
     <div v-if="!loading && notifications.length === 0" class="text-center text-gray-600">Aucune notification trouvée.</div>

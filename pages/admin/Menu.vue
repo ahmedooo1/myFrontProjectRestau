@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto p-4">
+  <div class="container mx-auto p-4" v-if="$auth.loggedIn && $auth.user.roles.includes('ROLE_ADMIN')">
     <h1 class="text-3xl font-bold mb-4 text-white">Gestion du Menu Admin</h1>
     <button @click="showAddModal = true" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">Ajouter un Élément de Menu</button>
     <div v-if="menuItems.length === 0">Aucun élément de menu disponible.</div>
