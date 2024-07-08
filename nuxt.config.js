@@ -15,7 +15,8 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'robots', content: 'index, follow' },
       { name: 'keywords', content: 'restaurant, NF-EAT, menu, food, culinary experience, Need For Eat, need for eat, elbeuf, rouen, 76, syrie, restau, syrien, libanais, kurde, oriental, français, eu, nf eat, nfeat, need 4 eat' },
-      { name: 'author', content: 'NF-EAT' }
+      { name: 'author', content: 'NF-EAT' },
+      { name: 'msvalidate.01', content: '9AA7D2F9F28B799F6AA4B8097E5FA043' }
     ],
     link: [
       { rel: 'icon', type: 'image/png', href: '/assets/images/NF-EAT-transparent.png' },
