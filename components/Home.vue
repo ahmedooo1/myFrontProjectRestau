@@ -138,7 +138,7 @@ export default {
       this.$set(this.expandedDescriptions, index, true);
     },
     goToDetails(id) {
-      // Implement logic to navigate to details page based on item id
+      this.$router.push({ path: `/menu/${id}` });
     }
   },
   computed: {
