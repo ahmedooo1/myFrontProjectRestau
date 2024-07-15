@@ -27,6 +27,12 @@
               <h3 class="text-xl font-semibold mb-2">{{ menu.name }}</h3>
               <p v-if="menu.description">{{ truncateDescription(menu.description) }} <span class="underline text-yellow-500 cursor-pointer" @click.stop="goToDetails(menu.id)">Voir plus</span></p>
               <p class="text-lg font-bold mt-2">{{ menu.price }} €</p>
+              <button v-if="$auth.loggedIn" @click.stop="addToCart(menu)" class="bg-green-500 text-white px-4 py-2 rounded mt-2 transition duration-300 ease-in-out transform hover:scale-105">
+                <img width="25" height="25" src="https://img.icons8.com/windows/32/FFFFFF/add-to-shopping-basket.png" alt="add-to-shopping-basket"/>
+              </button>
+              <button v-if="!$auth.loggedIn" @click.stop="openModal" class="bg-green-500 text-white px-4 py-2 rounded mt-2 transition duration-300 ease-in-out transform hover:scale-105">
+                <img width="25" height="25" src="https://img.icons8.com/windows/32/FFFFFF/add-to-shopping-basket.png" alt="add-to-shopping-basket"/>
+              </button>
             </div>
           </div>
         </div>
@@ -125,7 +131,24 @@ export default {
       });
     },
     addToCart(menu) {
-
+      if (!this.$auth.loggedIn) {
+        this.showModal = true; // Open the modal if not logged in
+        return;
+      }
+      try {
+        const payload = {
+          userId: this.$auth.user.id,
+          menuItemId: menu.id,
+          quantity: 1
+        };
+        await this.$axios.post('/carts', payload);
+        this.$toast.success('Article ajouté au panier');
+      } catch (error) {
+        console.error('Failed to add item to cart', error);
+      }
+    },
+    openModal() {
+      this.showModal = true;
     },
     truncateDescription(description) {
       if (description.length > 100) {

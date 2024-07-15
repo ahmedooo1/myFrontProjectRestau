@@ -48,8 +48,8 @@ export default {
     return {
       categories: [],
       menuItems: [],
-      selectedCategory: 'all', // Initialize to 'all' to display all items by default
-      showModal: false // Add this line to manage modal state
+      selectedCategory: 'all',
+      showModal: false
     }
   },
   async mounted() {
