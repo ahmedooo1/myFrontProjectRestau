@@ -130,7 +130,7 @@ export default {
         behavior: 'smooth'
       });
     },
-    addToCart(menu) {
+    async addToCart(menu) {
       if (!this.$auth.loggedIn) {
         this.showModal = true; // Open the modal if not logged in
         return;
