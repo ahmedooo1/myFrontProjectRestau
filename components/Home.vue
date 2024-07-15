@@ -81,18 +81,25 @@
         </div>
       </div>
     </section>
+    <AuthModal v-if="showModal" @close="showModal = false" />
   </div>
 </template>
 
 <script>
+import AuthModal from '~/components/Modal.vue'
 
 export default {
+  components: {
+    AuthModal
+  },
   data() {
     return {
       menus: [],
       images: [],
       currentIndex: 0,
-      expandedDescriptions: []
+      expandedDescriptions: [],
+      showModal: false
+
     };
   },
   async mounted() {
@@ -132,7 +139,7 @@ export default {
     },
     async addToCart(menu) {
       if (!this.$auth.loggedIn) {
-        this.showModal = true; // Open the modal if not logged in
+        this.showModal = true;
         return;
       }
       try {
