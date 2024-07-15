@@ -1,69 +1,83 @@
-# myFinalProject
+# myFrontProjectRestau
 
-## Build Setup
+Ce projet est une application frontend développée avec Nuxt.js pour un restaurant. Il permet de gérer l'affichage des menus, des catégories, des commandes, et plus encore.
 
-```bash
-# install dependencies
-$ npm install
+## Table des matières
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Utilisation](#utilisation)
+- [Scripts disponibles](#scripts-disponibles)
+- [Contribuer](#contribuer)
+- [Licence](#licence)
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+## Introduction
 
-# generate static project
-$ npm run generate
+Ce projet utilise Nuxt.js pour créer une application frontend dynamique et performante pour un restaurant. Il permet aux utilisateurs de naviguer facilement entre les différents menus et catégories, de passer des commandes, de consulter leur panier, etc.
+
+## Installation
+
+Pour installer ce projet, suivez les étapes suivantes :
+
+1. Clonez le repository :
+    ```bash
+    git clone https://github.com/ahmedooo1/myFrontProjectRestau.git
+    cd myFrontProjectRestau
+    ```
+
+2. Installez les dépendances avec npm ou yarn :
+    ```bash
+    npm install
+    # ou
+    yarn install
+    ```
+
+## Configuration
+
+Assurez-vous de configurer correctement les variables d'environnement dans un fichier `.env`. Voici quelques variables importantes :
+
+- `API_BASE_URL` : URL de base de l'API backend.
+
+Exemple de fichier `.env` :
+```dotenv
+API_BASE_URL=http://localhost:8000/api
 ```
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+## Utilisation
+Pour démarrer l'application en mode développement, utilisez la commande suivante :
+```
+npm run dev
+# ou
+yarn dev
+```
 
-## Special Directories
+Accédez ensuite à l'application via http://localhost:3000.
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
-
-### `assets`
-
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
-
-### `components`
-
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
-
-### `layouts`
-
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
+## Scripts disponibles
+Voici les scripts disponibles dans ce projet :
 
 
-### `pages`
+``` npm run dev ``` : Démarre l'application en mode développement.
+```npm run build``` : Construit l'application pour la production.
+```npm run start``` : Démarre l'application en mode production.
+```npm run generate``` : Génère un site statique prêt pour le déploiement.
+## Contribuer
+Les contributions sont les bienvenues ! Veuillez suivre ces étapes :
 
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
+Forkez le projet
+Créez votre branche feature (```git checkout -b feature/AmazingFeature```)
+Commitez vos modifications (```git commit -m 'Add some AmazingFeature'```)
+Poussez à la branche (```git push origin feature/AmazingFeature```)
+Ouvrez une Pull Request
+## Licence
+Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
 
-### `plugins`
+Pour utiliser ce modèle, créez un fichier `README.md` dans votre repository GitHub et collez le contenu ci-dessus. Assurez-vous de modifier les parties spécifiques à votre projet si nécessaire.
 
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
 
-### `static`
 
-This directory contains your static files. Each file inside this directory is mapped to `/`.
 
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
