@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Inscription</h3>
+    <h3 class="text-lg leading-6 font-medium text-white mb-4">Inscription</h3>
     <div class="text-gray-900">
       <input v-model="name" type="text" placeholder="Nom" class="border p-2 w-full mb-2"/>
       <span v-if="errors.name" class="text-red-500 text-sm">{{ errors.name }}</span>
@@ -10,13 +10,13 @@
       <span v-if="errors.password" class="text-red-500 text-sm">{{ errors.password }}</span>
       <div class="flex items-center mb-4">
         <input v-model="agreeTerms" type="checkbox" class="mr-2"/>
-        <label for="agreeTerms" class="text-sm">J'accepte les conditions générales</label>
+        <label for="agreeTerms" class="text-sm text-white">J'accepte les conditions générales</label>
       </div>
       <span v-if="errors.agreeTerms" class="text-red-500 text-sm">{{ errors.agreeTerms }}</span>
-      <button @click="register" class="bg-blue-500 text-white p-2 w-full">S'inscrire</button>
-      <p class="mt-4 text-sm text-gray-500">
+      <button @click="register" class="bg-blue-400 hover:bg-blue-500 text-white p-2 w-full">S'inscrire</button>
+      <p class="mt-4 text-sm text-gray-300">
         Vous avez déjà un compte ?
-        <a @click.prevent="$emit('switch-tab', 'login')" href="#" class="text-blue-500">Connectez-vous ici</a>.
+        <a @click.prevent="$emit('switch-tab', 'login')" href="#" class="text-blue-400">Connectez-vous ici</a>.
       </p>
     </div>
   </div>
@@ -63,3 +63,11 @@ export default {
   }
 }
 </script>
+<style scoped>
+ input {
+  border-radius: 5px;
+}
+button {
+  border-radius: 5px;
+}
+</style>

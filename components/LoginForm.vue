@@ -1,19 +1,19 @@
 <template>
   <div>
-    <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Connexion</h3>
+    <h3 class="text-lg leading-6 font-medium text-white mb-4">Connexion</h3>
     <div class="text-gray-900">
       <input v-model="email" type="email" placeholder="E-mail" class="border p-2 w-full mb-2" />
       <span v-if="errors.email" class="text-red-500 text-sm">{{ errors.email }}</span>
       <input v-model="password" type="password" placeholder="Mot de passe" class="border p-2 w-full mb-2" />
       <span v-if="errors.password" class="text-red-500 text-sm">{{ errors.password }}</span>
-      <p class="m-2 text-sm text-gray-500">
+      <p class="m-2 text-sm text-gray-300">
         Vous avez oublié votre mot de passe ?
         <a @click.prevent="$emit('switch-tab', 'forgotPassword')" href="#" class="text-blue-500">Réinitialiser le mot de passe</a>.
       </p>
-      <button @click="login" class="bg-blue-500 text-white p-2 w-full">Se connecter</button>
-      <p class="mt-4 text-sm text-gray-500">
+      <button @click="login" class="bg-blue-400 hover:bg-blue-500 text-white p-2 w-full">Se connecter</button>
+      <p class="mt-4 text-sm text-gray-300">
         Vous n'avez pas de compte ?
-        <a @click.prevent="$emit('switch-tab', 'register')" href="#" class="text-blue-500">Créer un compte</a>.
+        <a @click.prevent="$emit('switch-tab', 'register')" href="#" class="text-blue-400">Créer un compte</a>.
       </p>
     </div>
   </div>
@@ -57,3 +57,11 @@ export default {
   }
 }
 </script>
+<style scoped>
+ input {
+  border-radius: 5px;
+}
+button {
+  border-radius: 5px;
+}
+</style>
