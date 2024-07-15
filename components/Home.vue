@@ -110,7 +110,7 @@ export default {
       }
     },
     getImageUrl(imagePath) {
-      return `http://api.aa-world.store${imagePath}`;
+      return `https://api.aa-world.store${imagePath}`;
     },
     startSlider() {
       setInterval(() => {
@@ -125,8 +125,7 @@ export default {
       });
     },
     addToCart(menu) {
-      // Add the menu item to the cart
-      // Implement your cart logic here
+
     },
     truncateDescription(description) {
       if (description.length > 100) {

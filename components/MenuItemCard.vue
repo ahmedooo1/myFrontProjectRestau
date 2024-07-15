@@ -25,20 +25,31 @@
           <button v-if="$auth.loggedIn" @click.stop="addToCart(item)" class="bg-green-500 text-white px-4 py-2 rounded mt-2 transition duration-300 ease-in-out transform hover:scale-105">
             <img width="25" height="25" src="https://img.icons8.com/windows/32/FFFFFF/add-to-shopping-basket.png" alt="add-to-shopping-basket"/>
           </button>
+
+          <button v-if="!$auth.loggedIn" @click.stop="openModal" class="bg-green-500 text-white px-4 py-2 rounded mt-2 transition duration-300 ease-in-out transform hover:scale-105">
+            <img width="25" height="25" src="https://img.icons8.com/windows/32/FFFFFF/add-to-shopping-basket.png" alt="add-to-shopping-basket"/>
+          </button>
           <p class="absolute bottom-2 right-2 text-gray-600 text-xs flex font-bold">{{ item.commentCount }} <img width="24" height="24" src="https://img.icons8.com/material-outlined/24/737373/comments--v1.png" alt="comments--v1"/></p>
         </div>
       </div>
     </div>
+    <AuthModal v-if="showModal" @close="showModal = false" />
   </div>
 </template>
 
 <script>
+import AuthModal from '~/components/Modal.vue'
+
 export default {
+  components: {
+    AuthModal
+  },
   data() {
     return {
       categories: [],
       menuItems: [],
-      selectedCategory: 'all' // Initialize to 'all' to display all items by default
+      selectedCategory: 'all', // Initialize to 'all' to display all items by default
+      showModal: false // Add this line to manage modal state
     }
   },
   async mounted() {
@@ -71,9 +82,13 @@ export default {
       }
     },
     getImageUrl(imagePath) {
-      return `http://api.aa-world.store${imagePath}`;
+      return `https://api.aa-world.store${imagePath}`;
     },
     async addToCart(item) {
+      if (!this.$auth.loggedIn) {
+        this.showModal = true; // Open the modal if not logged in
+        return;
+      }
       try {
         const payload = {
           userId: this.$auth.user.id,
@@ -92,6 +107,9 @@ export default {
     truncateDescription(description) {
       const maxLength = 100; // Adjust the length as needed
       return description.length > maxLength ? description.substring(0, maxLength) + '...' : description;
+    },
+    openModal() {
+      this.showModal = true
     }
   },
   head() {

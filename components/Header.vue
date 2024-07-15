@@ -87,16 +87,16 @@ export default {
     },
     async logout() {
       await this.$auth.logout()
-      this.closeMenu() // Close the menu on logout
+      this.closeMenu()
       this.$router.push('/')
     }
   },
   watch: {
     '$auth.loggedIn'(newVal) {
       if (newVal) {
-        this.closeMenu() // Close the menu on login
+        this.closeMenu()
       }
-    }
+    },
   },
   beforeRouteLeave(to, from, next) {
     this.closeMenu();
