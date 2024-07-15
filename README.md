@@ -55,6 +55,7 @@ yarn dev
 Accédez ensuite à l'application via http://localhost:3000.
 
 ## Scripts disponibles
+
 Voici les scripts disponibles dans ce projet :
 
 
@@ -62,6 +63,7 @@ Voici les scripts disponibles dans ce projet :
 ```npm run build``` : Construit l'application pour la production.
 ```npm run start``` : Démarre l'application en mode production.
 ```npm run generate``` : Génère un site statique prêt pour le déploiement.
+
 ## Contribuer
 Les contributions sont les bienvenues ! Veuillez suivre ces étapes :
 
@@ -70,11 +72,9 @@ Créez votre branche feature (```git checkout -b feature/AmazingFeature```)
 Commitez vos modifications (```git commit -m 'Add some AmazingFeature'```)
 Poussez à la branche (```git push origin feature/AmazingFeature```)
 Ouvrez une Pull Request
+
 ## Licence
 Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
-
-
-Pour utiliser ce modèle, créez un fichier `README.md` dans votre repository GitHub et collez le contenu ci-dessus. Assurez-vous de modifier les parties spécifiques à votre projet si nécessaire.
 
 
 
