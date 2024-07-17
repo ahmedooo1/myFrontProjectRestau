@@ -11,8 +11,8 @@
       </div>
       <div class="mb-10">
         <p class="text-center font-bold text-lg">Montant total : {{ totalAmount }} €</p>
-        <!-- <p class="text-center font-bold text-lg">TVA (20%) : {{ tvaAmount.toFixed(2) }} €</p>
-        <p class="text-center font-bold text-lg">Total avec TVA : {{ totalAmountWithTva.toFixed(2) }} €</p> -->
+        <p class="text-center font-bold text-lg">TVA (20%) : {{ tvaAmount.toFixed(2) }} €</p>
+        <p class="text-center font-bold text-lg">Total avec TVA : {{ totalAmountWithTva.toFixed(2) }} €</p>
       </div>
       <form @submit.prevent="handleSubmit">
         <div class="mb-3 flex -mx-2">
