@@ -15,6 +15,9 @@
         </button>
       </div>
     </div>
+    <div v-if="cartItems.length > 0" class="text-white text-xl font-bold mb-4">
+      Prix total : {{ totalPrice }} €
+    </div>
     <button @click="emptyCart" :disabled="emptyingCart" class="bg-red-500 text-white px-4 py-2 rounded mt-4">
       {{ emptyingCart ? 'En cours...' : 'Vider le panier' }}
     </button>
@@ -32,6 +35,11 @@ export default {
   },
   async mounted() {
     await this.fetchCartItems();
+  },
+  computed: {
+    totalPrice() {
+      return this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    }
   },
   methods: {
     async fetchCartItems() {
@@ -91,4 +99,3 @@ export default {
   max-width: 800px;
 }
 </style>
-
