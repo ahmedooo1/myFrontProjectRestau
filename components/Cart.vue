@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto mt-8 p-4 max-w-2xl">
     <h2 class="text-2xl font-bold mb-4 text-gray-800">Votre Panier</h2>
-    <div v-if="cartItems.length === 0" class="text-white">Votre panier est vide.</div>
+    <div v-if="cartItems.length === 0" class="text-gray-800">Votre panier est vide.</div>
     <div v-for="(item, index) in cartItems" :key="generateUniqueKey(item, index)" class="flex bg-white rounded-lg shadow-md p-4 mb-4">
       <img :src="getImageUrl(item.image_url)" alt="Image de l'article" class="w-32 h-32 object-cover rounded-lg mr-4">
       <div class="flex-grow">
