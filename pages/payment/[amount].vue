@@ -10,9 +10,7 @@
         <h1 class="text-center font-bold text-xl uppercase">Informations de paiement sécurisé</h1>
       </div>
       <div class="mb-10">
-        <p class="text-center font-bold text-lg">Montant total : {{ totalAmount }} €</p>
-        <p class="text-center font-bold text-lg">TVA (20%) : {{ tvaAmount.toFixed(2) }} €</p>
-        <p class="text-center font-bold text-lg">Total avec TVA : {{ totalAmountWithTva.toFixed(2) }} €</p>
+        <p class="text-center font-bold text-lg">Montant total avec TVA : {{ totalAmountWithTva.toFixed(2) }} €</p>
       </div>
       <form @submit.prevent="handleSubmit">
         <div class="mb-3 flex -mx-2">
@@ -64,19 +62,12 @@ export default {
       cardholderName: '',
       clientSecret: '',
       processing: false,
-      error: '',
-      tvaRate: 0.20 // Exemple de taux de TVA de 20%
+      error: ''
     };
   },
   computed: {
-    totalAmount() {
-      return parseFloat(this.$route.params.amount) / 100;
-    },
-    tvaAmount() {
-      return this.totalAmount * this.tvaRate;
-    },
     totalAmountWithTva() {
-      return this.totalAmount + this.tvaAmount;
+      return parseFloat(this.$route.params.amount) / 100;
     }
   },
   async mounted() {
