@@ -96,11 +96,11 @@ export default {
       }
     },
     async placeOrder() {
-      const totalAmount = this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0) * 100; // convert to cents
-      if (totalAmount == 0) {
+      const totalAmountWithoutTva = this.totalPrice * 100; // convert to cents
+      if (totalAmountWithoutTva == 0) {
         alert('ajouter une commande !');
       } else {
-        this.$router.push({ path: `/payment/${totalAmount}` });
+        this.$router.push({ path: `/payment/${totalAmountWithoutTva}` });
       }
     }
   }
