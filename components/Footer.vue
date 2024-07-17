@@ -3,7 +3,7 @@ import { ref } from 'vue'
 
 const menus = ref([
   {
-    title: 'Projet',
+    title: 'Liens Utils',
     items: [
       { text: 'Contact', link: 'contact' },
       { text: 'Accueil', link: '/' },
@@ -90,7 +90,7 @@ const menus = ref([
         <!-- Social Media Links -->
         <div class="w-full px-4 sm:w-1/2 lg:w-3/12">
           <div class="w-full mb-10">
-            <h4 class="text-lg font-semibold text-dark dark:text-white mb-9">Follow Us On</h4>
+            <h4 class="text-lg font-semibold text-dark dark:text-white mb-9">Suivez nous</h4>
             <div class="flex items-center mb-6">
               <a
                 href="javascript:void(0)"
