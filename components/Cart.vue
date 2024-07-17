@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto mt-8 p-4 max-w-2xl">
-    <h2 class="text-2xl font-bold mb-4 text-white">Votre Panier</h2>
+    <h2 class="text-2xl font-bold mb-4 text-gray-800">Votre Panier</h2>
     <div v-if="cartItems.length === 0" class="text-white">Votre panier est vide.</div>
     <div v-for="(item, index) in cartItems" :key="generateUniqueKey(item, index)" class="flex bg-white rounded-lg shadow-md p-4 mb-4">
       <img :src="getImageUrl(item.image_url)" alt="Image de l'article" class="w-32 h-32 object-cover rounded-lg mr-4">
@@ -15,13 +15,13 @@
         </button>
       </div>
     </div>
-    <div v-if="cartItems.length > 0" class="text-white text-xl font-bold mb-4">
+    <div v-if="cartItems.length > 0" class="text-gray-800 text-xl font-bold mb-4">
       Prix total : {{ totalPrice }} €
     </div>
-    <div v-if="cartItems.length > 0" class="text-white text-xl font-bold mb-4">
+    <div v-if="cartItems.length > 0" class="text-gray-800 text-xl font-bold mb-4">
       TVA ({{ tvaRate * 100 }}%) : {{ tvaAmount.toFixed(2) }} €
     </div>
-    <div v-if="cartItems.length > 0" class="text-white text-xl font-bold mb-4">
+    <div v-if="cartItems.length > 0" class="text-gray-800 text-xl font-bold mb-4">
       Total avec TVA : {{ totalPriceWithTva.toFixed(2) }} €
     </div>
     <button @click="emptyCart" :disabled="emptyingCart" class="bg-red-500 text-white px-4 py-2 rounded mt-4">
