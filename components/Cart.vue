@@ -17,8 +17,12 @@
     </div>
     <div v-if="cartItems.length > 0" class="text-white text-xl font-bold mb-4">
       Prix total : {{ totalPrice }} €
-      Montant total avec TVA 20% : {{ totalAmountWithTva.toFixed(2) }} €
-
+    </div>
+    <div v-if="cartItems.length > 0" class="text-white text-xl font-bold mb-4">
+      TVA ({{ tvaRate * 100 }}%) : {{ tvaAmount.toFixed(2) }} €
+    </div>
+    <div v-if="cartItems.length > 0" class="text-white text-xl font-bold mb-4">
+      Total avec TVA : {{ totalPriceWithTva.toFixed(2) }} €
     </div>
     <button @click="emptyCart" :disabled="emptyingCart" class="bg-red-500 text-white px-4 py-2 rounded mt-4">
       {{ emptyingCart ? 'En cours...' : 'Vider le panier' }}
@@ -32,7 +36,8 @@ export default {
   data() {
     return {
       cartItems: [],
-      emptyingCart: false
+      emptyingCart: false,
+      tvaRate: 0.20 // Exemple de taux de TVA de 20%
     }
   },
   async mounted() {
@@ -42,8 +47,11 @@ export default {
     totalPrice() {
       return this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
     },
-    totalAmountWithTva() {
-      return parseFloat(this.$route.params.amount) / 100;
+    tvaAmount() {
+      return this.totalPrice * this.tvaRate;
+    },
+    totalPriceWithTva() {
+      return this.totalPrice + this.tvaAmount;
     }
   },
   methods: {
