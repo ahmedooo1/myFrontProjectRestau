@@ -17,6 +17,8 @@
     </div>
     <div v-if="cartItems.length > 0" class="text-white text-xl font-bold mb-4">
       Prix total : {{ totalPrice }} €
+      Montant total avec TVA 20% : {{ totalAmountWithTva.toFixed(2) }} €
+
     </div>
     <button @click="emptyCart" :disabled="emptyingCart" class="bg-red-500 text-white px-4 py-2 rounded mt-4">
       {{ emptyingCart ? 'En cours...' : 'Vider le panier' }}
@@ -39,6 +41,9 @@ export default {
   computed: {
     totalPrice() {
       return this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    },
+    totalAmountWithTva() {
+      return parseFloat(this.$route.params.amount) / 100;
     }
   },
   methods: {
