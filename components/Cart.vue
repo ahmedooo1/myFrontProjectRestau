@@ -96,7 +96,7 @@ export default {
       }
     },
     async placeOrder() {
-      const totalAmountWithTva = this.totalPriceWithTva * 100; // convert to cents
+      const totalAmountWithTva = this.totalPriceWithTva.toFixed(2); // use the fixed amount
       if (totalAmountWithTva == 0) {
         this.$toast.info('ajouter une commande !');
       } else {

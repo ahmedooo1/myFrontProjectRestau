@@ -10,8 +10,7 @@
         <h1 class="text-center font-bold text-xl uppercase">Informations de paiement sécurisé</h1>
       </div>
       <div class="mb-10">
-        <p class="text-center font-bold text-lg">Montant total : {{ totalAmountWithTva.toFixed(2) }} €</p>
-        <p class="text-center font-bold text-lg">TVA (20%) : {{ tvaAmount.toFixed(2) }} €</p>
+        <p class="text-center font-bold text-lg">Montant total : {{ totalAmountWithTva }} €</p>
       </div>
       <form @submit.prevent="handleSubmit">
         <div class="mb-3 flex -mx-2">
@@ -63,19 +62,12 @@ export default {
       cardholderName: '',
       clientSecret: '',
       processing: false,
-      error: '',
-      tvaRate: 0.20 // Exemple de taux de TVA de 20%
+      error: ''
     };
   },
   computed: {
-    totalAmountWithoutTva() {
-      return parseFloat(this.$route.params.amount) / 100;
-    },
-    tvaAmount() {
-      return this.totalAmountWithoutTva * this.tvaRate;
-    },
     totalAmountWithTva() {
-      return this.totalAmountWithoutTva + this.tvaAmount;
+      return parseFloat(this.$route.params.amount);
     }
   },
   async mounted() {
@@ -85,7 +77,7 @@ export default {
     this.cardElement.mount('#card-element');
 
     try {
-      const response = await this.$axios.post('/payment', { amount: this.$route.params.amount });
+      const response = await this.$axios.post('/payment', { amount: this.totalAmountWithTva * 100 });
       this.clientSecret = response.data.clientSecret;
       console.log('Client Secret:', this.clientSecret); // Ajout de la vérification du client secret
     } catch (error) {

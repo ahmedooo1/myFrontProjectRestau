@@ -1,5 +1,8 @@
 <template>
-<Cart/>
+  <div class="bg-gray-200">
+  <Cart/>
+
+  </div>
 
 </template>
 
