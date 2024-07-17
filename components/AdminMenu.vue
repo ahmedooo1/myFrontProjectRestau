@@ -88,6 +88,7 @@ export default {
       await this.$axios.post('/menu', formData)
       this.closeModal()
       await this.fetchMenuItems()
+      this.$toast.success('Élément ajouté avec succès!')
     },
     async updateMenuItem() {
       const formData = new FormData()
@@ -101,10 +102,13 @@ export default {
       await this.$axios.put(`/menu/${this.currentItem.id}`, formData)
       this.closeModal()
       await this.fetchMenuItems()
+      this.$toast.success('Élément mis à jour avec succès!')
+
     },
     async deleteItem(id) {
       await this.$axios.delete(`/menu/${id}`)
       await this.fetchMenuItems()
+      this.$toast.success('Élément supprimé avec succès!')
     },
     editItem(item) {
       this.currentItem = { ...item }
