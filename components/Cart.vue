@@ -96,11 +96,11 @@ export default {
       }
     },
     async placeOrder() {
-      const totalAmountWithoutTva = this.totalPrice * 100; // convert to cents
-      if (totalAmountWithoutTva == 0) {
-        alert('ajouter une commande !');
+      const totalAmountWithTva = this.totalPriceWithTva * 100; // convert to cents
+      if (totalAmountWithTva == 0) {
+        this.$toast.info('ajouter une commande !');
       } else {
-        this.$router.push({ path: `/payment/${totalAmountWithoutTva}` });
+        this.$router.push({ path: `/payment/${totalAmountWithTva}` });
       }
     }
   }
