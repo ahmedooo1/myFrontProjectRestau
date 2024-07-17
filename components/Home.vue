@@ -19,7 +19,10 @@
     <!-- Menu Section -->
     <section ref="menuSection" class="py-16 text-white">
       <div class="container mx-auto px-6 text-center">
-        <h2 class="text-4xl font-bold text-center mb-12">Nos Menus</h2>
+        <div class="relative">
+          <img src="../assets/images/Paint_Brush.png" alt="NF-EAT Menu title bg" class="w-64 mx-auto opacity-0">
+          <h2 class="text-4xl font-bold text-center mb-12 bg-title">Nos Menus</h2>
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-left">
           <div v-for="(menu, index) in limitedMenus" :key="index" class="bg-gray-600 rounded-lg shadow-lg overflow-hidden animate-slide-in transition duration-300 ease-in-out transform hover:scale-105">
             <img :src="getImageUrl(menu.image_url)" alt="Menu Image" class="w-full h-48 object-cover">
@@ -43,7 +46,9 @@
     <!-- Presentation Section -->
     <section class="py-16 text-white">
       <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold text-center mb-12">À propos de NF-EAT</h2>
+        <div class="relative text-center">
+        <h2 class="text-4xl font-bold text-center mb-12 bg-title">À propos de NF-EAT</h2>
+        </div>
         <div class="flex flex-col md:flex-row items-center">
           <div class="md:w-1/2 md:pr-8">
             <img src="../assets/images/restauNFE.jpg" alt="About Image" class="rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-full">
@@ -61,7 +66,9 @@
     <!-- Services Section -->
     <section class="py-16 text-white">
       <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold text-center mb-12">Nos Services</h2>
+        <div class="relative text-center">
+        <h2 class="text-4xl font-bold text-center mb-12 bg-title">Nos Services</h2>
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           <div class="text-center p-8 bg-gray-600 rounded-lg shadow-lg animate-fade-in transition duration-300 ease-in-out transform hover:scale-105">
             <i class="fas fa-utensils w-16 h-16 mx-auto mb-4 text-yellow-500"></i>
@@ -256,5 +263,14 @@ export default {
 
 section.relative {
   overflow: hidden; /* Prevent overflow */
+}
+
+.bg-title {
+  position: relative;
+  display: inline-block;
+  padding: 0 1rem;
+  background: url('../assets/images/Paint_Brush.png') no-repeat center;
+  background-size: cover;
+  padding: 1rem 3rem;
 }
 </style>
