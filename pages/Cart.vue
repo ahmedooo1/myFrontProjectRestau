@@ -11,6 +11,8 @@ import Cart from '~/components/Cart.vue'
 export default {
 components: {
   Cart
-  }
+  },
+  middleware: 'auth'
+
 }
 </script>
