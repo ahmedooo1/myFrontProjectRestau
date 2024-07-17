@@ -127,6 +127,12 @@ export default {
     extendRoutes(routes, resolve) {
       routes.push(
         {
+          name: 'cart',
+          path: '/cart',
+          component: resolve(__dirname, 'pages/Cart.vue'),
+          meta: { requiresAuth: true }
+        },
+        {
           name: 'admin-menu',
           path: '/admin/menu',
           component: resolve(__dirname, 'pages/admin/Menu.vue'),
