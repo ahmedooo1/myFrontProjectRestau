@@ -10,7 +10,7 @@
         <h1 class="text-center font-bold text-xl uppercase">Informations de paiement sécurisé</h1>
       </div>
       <div class="mb-10">
-        <p class="text-center font-bold text-lg">Montant total avec TVA : {{ totalAmountWithTva.toFixed(2) }} €</p>
+        <p class="text-center font-bold text-lg">Montant total avec TVA 20% : {{ totalAmountWithTva.toFixed(2) }} €</p>
       </div>
       <form @submit.prevent="handleSubmit">
         <div class="mb-3 flex -mx-2">
