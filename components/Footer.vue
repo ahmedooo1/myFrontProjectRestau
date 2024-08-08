@@ -50,7 +50,7 @@ const menus = ref([
 </g>
 </svg>
               </span>
-              <span>pour acheter ce site contacter le : <a href="mailto:ahmad.ahmad.professionnel@gmail.com" class="text-white no-underline">ahmad.ahmad.professionnel@gmail.com</a>
+              <span>pour avoir ce site ou d'autres sites contactez nous par mail : <br/><a href="mailto:ahmad.ahmad.professionnel@gmail.com" class="text-white underline">ahmad.ahmad.professionnel@gmail.com</a>
 
 </span>
             </p>
