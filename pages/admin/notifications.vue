@@ -42,10 +42,13 @@
 </template>
 
 <script>
+import axios from 'axios'; // Assurez-vous que axios est importé
+
 export default {
   data() {
     return {
       notifications: [],
+      notificationService: null, // Assurez-vous que cet objet est correctement initialisé
       loading: true,
       page: 1,
       limit: 10,
@@ -59,6 +62,7 @@ export default {
   },
   async mounted() {
     await this.fetchNotifications();
+    this.interval = setInterval(this.fetchNotifications, 15000); // Set interval to refresh every 15 seconds
     this.listenForNotifications();
   },
   methods: {
@@ -88,19 +92,19 @@ export default {
       }
     },
     listenForNotifications() {
-      this.$socket.on('new-order', (data) => {
-        const details = this.parseDetails(data.commandNames);
-        const notification = {
-          ...data,
-          commandNames: details.commandNames.join(', '),
-          totalQuantity: details.totalQuantity,
-          totalPrice: details.totalPrice
-        };
-        this.notifications.unshift(notification);
-        if (this.notifications.length > this.limit) {
-          this.notifications.pop();
-        }
-      });
+      // Assurez-vous que notificationService est bien initialisé
+      if (!this.notificationService) {
+        console.error('notificationService is not initialized');
+        return;
+      }
+
+      try {
+        this.notificationService.on('new-notification', (notification) => {
+          this.notifications.push(notification);
+        });
+      } catch (error) {
+        console.error('Erreur lors de l\'écoute des notifications:', error);
+      }
     },
     parseDetails(details) {
       const items = details.split(', ');
