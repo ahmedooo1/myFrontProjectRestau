@@ -1,7 +1,9 @@
 <template>
   <div>
     <!-- Hero Section with Custom Slider -->
-    <div class="sale-badge">Site à Vendre</div>
+    <div class="sale-badge text-white text-xl font-bold">Site à Vendre <br>
+      <a href="/contact" class="text-white text-xl font-bold text-yellow-300 sale-link">Contacte nous !</a>
+    </div>
     <section class="relative bg-center bg-cover h-screen bg-gray-800 text-white">
       <div class="relative inset-0 bg-black opacity-50"></div>
       <div class="absolute inset-0">
@@ -280,14 +282,23 @@ section.relative {
   top: 120px;
   right: 20px;
   background-color: #ff0000; /* Bright red color */
-  color: #ffffff; /* White text */
   padding: 10px 20px;
-  font-size: 1.2rem;
-  font-weight: bold;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 1000;
   animation: pulse 2s infinite;
+}
+
+.sale-link {
+  /*color: #ffffff;*/ /* White text */
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.sale-link:hover {
+  color: #ffcc00; /* Change color on hover for effect */
 }
 
 @keyframes pulse {
