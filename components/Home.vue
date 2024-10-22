@@ -1,6 +1,7 @@
 <template>
   <div>
     <!-- Hero Section with Custom Slider -->
+    <div class="sale-badge">Site à Vendre</div>
     <section class="relative bg-center bg-cover h-screen bg-gray-800 text-white">
       <div class="relative inset-0 bg-black opacity-50"></div>
       <div class="absolute inset-0">
@@ -272,5 +273,32 @@ section.relative {
   background: url('../assets/images/Paint_Brush.png') no-repeat center;
   background-size: cover;
   padding: 1rem 3rem;
+}
+
+.sale-badge {
+  position: fixed;
+  top: 120px;
+  right: 20px;
+  background-color: #ff0000; /* Bright red color */
+  color: #ffffff; /* White text */
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
