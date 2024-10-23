@@ -62,7 +62,7 @@ export default {
   },
   async mounted() {
     await this.fetchNotifications();
-    this.interval = setInterval(this.fetchNotifications, 15000); // Set interval to refresh every 15 seconds
+    //this.interval = setInterval(this.fetchNotifications, 15000); // Set interval to refresh every 15 seconds
     this.listenForNotifications();
   },
   methods: {
