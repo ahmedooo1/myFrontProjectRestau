@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Hero Section with Custom Slider -->
-    <div class="sale-badge text-white text-xl font-bold">Site à Vendre <br>
+    <div class="sale-badge text-white text-xl font-bold">Site à Vendre ! <br>
       <a href="/contact" class="text-white text-xl font-bold text-yellow-300 sale-link">Contacte nous !</a>
     </div>
     <section class="relative bg-center bg-cover h-screen bg-gray-800 text-white">
