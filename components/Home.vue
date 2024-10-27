@@ -133,7 +133,7 @@ export default {
       }
     },
     getImageUrl(imagePath) {
-      return `https://api.aa-world.store${imagePath}`;
+      return `https://apinfeat.aa-world.store${imagePath}`;
     },
     startSlider() {
       setInterval(() => {

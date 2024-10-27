@@ -60,7 +60,7 @@ export default {
       this.cartItems = response.data.map((item, index) => ({ ...item, loading: false, uniqueKey: `${item.cartId}-${item.menuItemId}-${index}` }));
     },
     getImageUrl(imagePath) {
-      return `http://api.aa-world.store${imagePath}`;
+      return `https://apinfeat.aa-world.store${imagePath}`;
     },
     generateUniqueKey(item, index) {
       return `${item.cartId}-${item.menuItemId}-${index}`;

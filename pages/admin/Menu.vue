@@ -209,7 +209,7 @@ export default {
       this.selectedFile = event.target.files[0];
     },
     getImageUrl(imagePath) {
-      return `http://api.aa-world.store${imagePath}`;
+      return `https://apinfeat.aa-world.store${imagePath}`;
     }
   }
 }

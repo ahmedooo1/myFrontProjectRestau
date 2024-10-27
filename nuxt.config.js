@@ -58,7 +58,7 @@ export default {
 
 
   axios: {
-    baseURL: 'https://api.aa-world.store/api',
+    baseURL: 'https://apinfeat.aa-world.store/api',
   },
 
   auth: {
