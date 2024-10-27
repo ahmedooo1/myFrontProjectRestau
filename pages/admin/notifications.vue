@@ -126,8 +126,17 @@ export default {
     },
     formatToParisTimezone(dateString) {
       const date = new Date(dateString);
+      // Vérifiez si la date est valide
+      if (isNaN(date.getTime())) {
+        console.error('Invalid date:', dateString);
+        return dateString; // Retournez la chaîne d'origine si la date est invalide
+      }
       // Convertit la date en Europe/Paris et la formate
-      return date.toLocaleString('fr-FR', { timeZone: 'Europe/Paris', dateStyle: 'short', timeStyle: 'short' });
+      return date.toLocaleString('fr-FR', { 
+        timeZone: 'Europe/Paris', 
+        dateStyle: 'short', 
+        timeStyle: 'short' 
+      });
     },
     async prevPage() {
       if (this.page > 1) {
