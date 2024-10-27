@@ -53,10 +53,9 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/sitemap'
   ],
-
-
 
   axios: {
     baseURL: 'https://apinfeat.aa-world.store/api',
@@ -177,5 +176,16 @@ export default {
         }
       );
     }
+  },
+
+  sitemap: {
+    hostname: 'https://nfeat.aa-world.store', // Replace with your site's domain
+    routes: [
+      // Add dynamic routes if needed
+      '/about',
+      '/menus',
+      '/contact',
+      // Add more routes as necessary
+    ]
   }
 }
