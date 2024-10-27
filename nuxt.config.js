@@ -1,4 +1,5 @@
 export default {
+  target: 'static',
   // Disable server-side rendering
   ssr: false,
 
