@@ -62,7 +62,7 @@ export default {
   },
   async mounted() {
     await this.fetchNotifications();
-    //this.interval = setInterval(this.fetchNotifications, 15000); // Set interval to refresh every 15 seconds
+    this.interval = setInterval(this.fetchNotifications, 15000); // Set interval to refresh every 15 seconds
     this.listenForNotifications();
   },
   methods: {
@@ -81,7 +81,8 @@ export default {
             ...notification,
             commandNames: details.commandNames.join(', '),
             totalQuantity: details.totalQuantity,
-            totalPrice: details.totalPrice
+            totalPrice: details.totalPrice,
+            createdAt: this.formatToParisTimezone(notification.createdAt) // Formatage ici
           };
         });
         this.total = response.data.total;
@@ -122,6 +123,11 @@ export default {
       });
 
       return { commandNames, totalQuantity, totalPrice };
+    },
+    formatToParisTimezone(dateString) {
+      const date = new Date(dateString);
+      // Convertit la date en Europe/Paris et la formate
+      return date.toLocaleString('fr-FR', { timeZone: 'Europe/Paris', dateStyle: 'short', timeStyle: 'short' });
     },
     async prevPage() {
       if (this.page > 1) {
