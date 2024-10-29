@@ -55,7 +55,6 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/sitemap'
   ],
 
   axios: {
