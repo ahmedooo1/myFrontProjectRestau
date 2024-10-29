@@ -179,14 +179,14 @@ export default {
     }
   },
 
-  sitemap: {
-    hostname: 'https://nfeat.aa-world.store', // Replace with your site's domain
-    routes: [
-      // Add dynamic routes if needed
-      '/about',
-      '/menus',
-      '/contact',
-      // Add more routes as necessary
-    ]
-  }
+  // sitemap: {
+  //   hostname: 'https://nfeat.aa-world.store', // Replace with your site's domain
+  //   routes: [
+  //     // Add dynamic routes if needed
+  //     '/about',
+  //     '/menus',
+  //     '/contact',
+  //     // Add more routes as necessary
+  //   ]
+  // }
 }
