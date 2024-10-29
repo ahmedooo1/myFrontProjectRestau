@@ -21,9 +21,6 @@ jobs:
     - name: Install Dependencies
       run: npm install
       
-    - name: Generate Static Files
-      run: npm run generate
-      
     - name: Build
       run: npm run build
 
