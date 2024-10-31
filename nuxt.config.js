@@ -185,6 +185,7 @@ export default {
   },
 
   generate: {
-    fallback: true
+    fallback: '404.html',
+    routes: ['/404']
   }
 }
