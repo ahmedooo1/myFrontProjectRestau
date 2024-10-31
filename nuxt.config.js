@@ -55,6 +55,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     '@nuxtjs/tailwindcss',
+    //'@nuxtjs/sitemap'
   ],
 
   axios: {
@@ -173,19 +174,17 @@ export default {
           path: '/profile',
           component: resolve(__dirname, 'pages/profile.vue'),
           meta: { requiresAuth: true }
+        },
+        {
+          name: 'custom-error',
+          path: '*',
+          component: resolve(__dirname, 'pages/error.vue')
         }
       );
     }
   },
 
-  // sitemap: {
-  //   hostname: 'https://nfeat.aa-world.store', // Replace with your site's domain
-  //   routes: [
-  //     // Add dynamic routes if needed
-  //     '/about',
-  //     '/menus',
-  //     '/contact',
-  //     // Add more routes as necessary
-  //   ]
-  // }
+  generate: {
+    fallback: true
+  }
 }
