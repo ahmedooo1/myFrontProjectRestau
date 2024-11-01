@@ -29,9 +29,9 @@ const menus = ref([
         <!-- Logo and Description -->
         <div class="w-full px-4 sm:w-2/3 lg:w-3/12 text-center">
           <div class="w-full mb-10">
-            <a href="javascript:void(0)" class="mb-6 inline-block max-w-[160px]">
+            <NuxtLink href="javascript:void(0)" class="mb-6 inline-block max-w-[160px]">
               <img src="../assets/images/NF-EAT-transparent.png" alt="NF-EAT Logo" class="w-28">
-            </a>
+            </NuxtLink>
             <p class="text-base text-body-color dark:text-dark-6 mb-7">
               Découvrez une expérience culinaire unique chez NF-EAT, où chaque plat est une œuvre d'art.
             </p>
@@ -61,9 +61,9 @@ const menus = ref([
               <h4 class="font-medium">{{ menu.title }}</h4>
               <ul>
                 <li v-for="item in menu.items" :key="item.link" class="mb-2">
-                  <nuxt-link :to="item.link" class="text-gray-400 hover:text-primary transition duration-200">
+                  <NuxtLink :to="item.link" class="text-gray-400 hover:text-primary transition duration-200">
                     {{ item.text }}
-                  </nuxt-link>
+                  </NuxtLink>
                 </li>
               </ul>
             </li>
