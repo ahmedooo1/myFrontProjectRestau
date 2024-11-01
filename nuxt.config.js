@@ -203,5 +203,10 @@ export default {
   generate: {
     fallback: '404.html',
     routes: ['/404']
-  }
+  },
+
+  server: {
+    host: '0.0.0.0', // Écoute sur toutes les interfaces
+    port: 3000,      // Utilise le port 3000
+  },
 }
