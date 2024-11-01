@@ -73,7 +73,7 @@
 export default {
   data() {
     return {
-      heroImage: require('../assets/images/restauNFE.jpg'), // Example hero image URL
+      heroImage: require('../assets/images/restauNFE.jpg'), 
       team: [
         {
           id: 1,
