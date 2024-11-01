@@ -23,7 +23,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/png', href: '/assets/images/NF-EAT-transparent.png' },
-      { rel: 'canonical', href: 'https://app.aa-world.store' }
+      { rel: 'canonical', href: 'https://nfeat.aa-world.store' }
     ],
     script: [
       { src: 'https://www.googletagmanager.com/gtag/js?id=G-9EHF70HDB3', async: true }
