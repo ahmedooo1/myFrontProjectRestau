@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 const menus = ref([
   {
     title: 'Liens Utils',
     items: [
-      { text: 'Contact', link: 'contact' },
+      { text: 'Contact', link: '/contact' },
       { text: 'Accueil', link: '/' },
-      { text: 'About', link: 'about' },
-      { text: 'Mentions Légales', link: 'MentionLegales' }
+      { text: 'About', link: '/about' },
+      { text: 'Mentions Légales', link: '/MentionLegales' }
     ]
   },
   {
@@ -20,6 +18,7 @@ const menus = ref([
     ]
   }
 ])
+
 </script>
 
 <template>
