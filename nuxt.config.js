@@ -206,7 +206,6 @@ export default {
   },
 
   server: {
-    host: '0.0.0.0', // Écoute sur toutes les interfaces
-    port: 3000,      // Utilise le port 3000
+    port: 3000,     
   },
 }

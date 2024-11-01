@@ -14,9 +14,9 @@ const menus = ref([
   {
     title: 'Utilisateurs',
     items: [
-      { text: 'Menus', link: '/menus' },
-      { text: 'Profile', link: '/profile' },
-      { text: 'Politique de Confidentialité', link: '/politique-confidentialite' }
+      { text: 'Menus', link: 'menus' },
+      { text: 'Profile', link: 'profile' },
+      { text: 'Politique de Confidentialité', link: 'politique-confidentialite' }
     ]
   }
 ])
@@ -63,12 +63,9 @@ const menus = ref([
             <h4 class="text-lg font-semibold text-dark dark:text-white mb-9">{{ menu.title }}</h4>
             <ul class="space-y-3">
               <li v-for="item in menu.items" :key="item.text">
-                <a
-                  :href="item.link"
-                  class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
-                >
-                  {{ item.text }}
-                </a>
+              
+                <router-link :to="`/${item.link}`" class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6">{{ item.text }}</router-link>
+
               </li>
             </ul>
           </div>
