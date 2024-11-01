@@ -85,13 +85,13 @@ export default {
           id: 2,
           name: 'Alex DICHON',
           position: 'Sous-Chef',
-          image: 'https://th.bing.com/th/id/OIP.Zil4Xgx133CpTwIf_0itPQAAAA?rs=1&pid=ImgDetMain'
+          image: 'https://cdn.pixabay.com/photo/2024/01/27/15/08/pizza-8536177_960_720.jpg'
         },
         {
           id: 3,
           name: 'Sarah NORMAND',
           position: 'Chef Pâtissier',
-          image: 'https://th.bing.com/th/id/OIP.ft7Tleq1BASlHC2FCpL5fQAAAA?rs=1&pid=ImgDetMain'
+          image: 'https://cdn.pixabay.com/photo/2024/08/20/13/12/ai-generated-8983262_1280.jpg'
         }
       ]
     };
