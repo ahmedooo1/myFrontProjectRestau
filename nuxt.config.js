@@ -128,6 +128,22 @@ export default {
     extendRoutes(routes, resolve) {
       routes.push(
         {
+          name: 'home',
+          path: '/',
+          component: resolve(__dirname, 'pages/index.vue')
+        },
+        {
+          name: 'contact',
+          path: '/contact',
+          component: resolve(__dirname, 'pages/contact.vue')
+        },
+        {
+          name: 'about',
+          path: '/about',
+          component: resolve(__dirname, 'pages/about.vue')
+        },
+
+        {
           name: 'cart',
           path: '/cart',
           component: resolve(__dirname, 'pages/Cart.vue'),
