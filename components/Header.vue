@@ -6,7 +6,7 @@
     <button @click="toggleMenu" class="md:hidden">
       <img width="30" height="30" src="https://img.icons8.com/ios-filled/50/FFFFFF/menu--v1.png" alt="menu" />
     </button>
-    <nav :class="{'block p-3 rounded-b-3xl': isMenuOpen , 'hidden': !isMenuOpen}" class="w-full md:flex md:items-center md:w-auto md:static absolute top-16 right-0 bg-gray-800 md:bg-transparent z-10 ">
+    <nav :class="{'block p-3 rounded-b-3xl': isMenuOpen , 'hidden': !isMenuOpen}" class="w-full md:flex md:items-center md:w-auto md:static absolute top-24 right-0 bg-gray-800 md:bg-transparent z-10 ">
       <ul class="flex flex-col md:flex-row md:space-x-4">
         <li>
           <router-link to="/" class="flex items-center" title="Accueil" @click.native="closeMenu">
