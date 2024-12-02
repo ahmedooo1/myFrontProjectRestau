@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     getImageUrl(imagePath) {
-      return `https://nfeat.aa-world.store${imagePath}`;
+      return `https://apinfeat.aa-world.store${imagePath}`;
     },
     async addToCart(item) {
       try {
