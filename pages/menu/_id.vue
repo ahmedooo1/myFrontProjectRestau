@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto p-4">
+  <div class="container mx-auto p-4 sm:w-1/2">
     <div class="bg-white rounded-lg shadow-md p-4 cursor-pointer" @click="$router.push(`/menu/${menuItem.id}`)">
       <img :src="getImageUrl(menuItem.image_url)" alt="Image de l'article du menu" class=" w-72 object-cover rounded-t-lg bg-contain mx-auto">
       <div class="p-4">
